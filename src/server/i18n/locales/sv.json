@@ -1,0 +1,156 @@
+{
+  "axes": {
+    "consistency": "Konsekvens",
+    "tactical_read": "Taktisk läsning",
+    "control": "Kontroll",
+    "serve": "Serve",
+    "endurance": "Uthållighet",
+    "positioning": "Positionering"
+  },
+  "common": {
+    "unsubBefore": "Om du vill kan du ",
+    "unsubLink": "avprenumerera",
+    "unsubAfter": " här."
+  },
+  "evaluation": {
+    "subject": "Ny utvärdering tillgänglig",
+    "kicker": "NY UTVÄRDERING",
+    "heading": "Ny utvärdering tillgänglig",
+    "sub": "Se hur det gick på din senaste lektion. Granska ditt resultat, feedback och framsteg.",
+    "overallLabel": "Totalpoäng",
+    "coachKicker": "TRÄNARE",
+    "lessonKicker": "LEKTION",
+    "strengthKicker": "STÖRSTA STYRKA",
+    "cta": "Visa utvärdering",
+    "reason": "Du får det här mejlet eftersom en ny utvärdering har lagts till i din profil.",
+    "text": "Ny utvärdering tillgänglig.\n\nTotalt: {{score}}/100\nTränare: {{coach}}{{when}}{{strength}}\n\nSe detaljerna i +54.",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\nStörsta styrka: {{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "Lektion bekräftad — {{title}}",
+    "heading": "Lektion bekräftad",
+    "sub": "Din lektion har bokats.",
+    "personCoach": "Tränare",
+    "personStudent": "Elev",
+    "date": "Datum",
+    "time": "Tid",
+    "cta": "Visa bokning",
+    "reason": "Du får det här mejlet eftersom du bokade en lektion hos +54.",
+    "text": "Din lektion med {{name}} har bekräftats.\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "Padellektion med {{name}}."
+  },
+  "lessonRequest": {
+    "subject": "Ny lektionsförfrågan — {{name}}",
+    "heading": "Ny lektionsförfrågan",
+    "sub": "En elev har begärt en lektion med dig. Bekräfta eller avböj förfrågan.",
+    "date": "Datum",
+    "time": "Tid",
+    "person": "Elev",
+    "cta": "Visa förfrågan",
+    "reason": "Du får det här mejlet eftersom en elev har begärt en lektion med dig.",
+    "text": "{{name}} har begärt en lektion med dig.\n\n{{date}} · {{time}}\n\nBekräfta eller avböj förfrågan i +54."
+  },
+  "lessonDeclined": {
+    "subject": "Lektion avböjd — {{date}}",
+    "heading": "Lektion avböjd",
+    "sub": "{{coach}} avböjde din lektionsförfrågan.",
+    "date": "Datum",
+    "time": "Tid",
+    "person": "Tränare",
+    "motive": "Orsak",
+    "cta": "Visa schema",
+    "reason": "Du får det här mejlet eftersom en lektionsförfrågan avböjdes.",
+    "text": "{{coach}} avböjde din lektion.\n\n{{date}} · {{time}}\n\nOrsak:\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "Återställ ditt lösenord — +54",
+    "heading": "Återställ lösenord",
+    "intro": "Vi har fått en begäran om att återställa lösenordet för det här kontot.",
+    "openLink": "Öppna länken nedan (giltig i 1 timme):",
+    "cta": "Återställ lösenord",
+    "copyUrl": "Eller kopiera den här adressen till din webbläsare:",
+    "ignore": "Om du inte begärde detta kan du ignorera det här mejlet."
+  },
+  "passwordChanged": {
+    "subject": "Lösenordet för ditt +54-konto har återställts.",
+    "heading": "Lösenordet för ditt +54-konto har återställts.",
+    "greeting": "Hej {{name}},",
+    "greetingNoName": "Hej,",
+    "intro": "Lösenordet för ditt +54-konto har återställts.",
+    "ifYou": "Om det var du som gjorde ändringen behövs ingen ytterligare åtgärd.",
+    "ifNotYou": "Om du inte känner igen den här ändringen, återställ lösenordet direkt och granska kontots säkerhetsinställningar:",
+    "cta": "Återställ mitt lösenord",
+    "help": "Om du behöver hjälp, kontakta +54-teamet.",
+    "signoffLead": "Med vänliga hälsningar,",
+    "signoff": "Team +54",
+    "reason": "Du får det här mejlet eftersom lösenordet för ditt konto har återställts."
+  },
+  "authOtp": {
+    "ignore": "Om du inte begärde detta kan du ignorera det här mejlet.",
+    "text": "Din +54-kod är: {{code}}",
+    "emailVerification": {
+      "subject": "Verifiera din e-post — +54",
+      "heading": "Verifiera din e-post",
+      "sub": "Ange den här koden i +54 för att bekräfta din adress.",
+      "reason": "Du får det här mejlet för att du skapade ett konto hos +54."
+    },
+    "signIn": {
+      "subject": "Din inloggningskod — +54",
+      "heading": "Din inloggningskod",
+      "sub": "Ange den här koden i +54 för att fortsätta.",
+      "reason": "Du får det här mejlet för att någon försökte logga in med den här adressen."
+    },
+    "forgetPassword": {
+      "subject": "Återställ ditt lösenord — +54",
+      "heading": "Återställ lösenord",
+      "sub": "Ange den här koden i +54 för att välja ett nytt lösenord.",
+      "reason": "Du får det här mejlet för att en lösenordsåterställning begärdes."
+    }
+  },
+  "authLink": {
+    "ignore": "Om du inte begärde detta kan du ignorera det här mejlet.",
+    "copyUrl": "Eller kopiera den här adressen till din webbläsare:",
+    "text": "Öppna den här länken:\n{{url}}",
+    "emailVerification": {
+      "subject": "Verifiera din e-post — +54",
+      "heading": "Verifiera din e-post",
+      "sub": "Öppna knappen nedan för att bekräfta din adress.",
+      "cta": "Verifiera e-post",
+      "reason": "Du får det här mejlet för att du skapade ett konto hos +54."
+    },
+    "signIn": {
+      "subject": "Logga in på +54",
+      "heading": "Logga in på +54",
+      "sub": "Öppna knappen nedan för att fortsätta.",
+      "cta": "Logga in",
+      "reason": "Du får det här mejlet för att någon försökte logga in med den här adressen."
+    },
+    "forgetPassword": {
+      "subject": "Återställ ditt lösenord — +54",
+      "heading": "Återställ lösenord",
+      "sub": "Öppna knappen nedan för att välja ett nytt lösenord.",
+      "cta": "Återställ lösenord",
+      "reason": "Du får det här mejlet för att en lösenordsåterställning begärdes."
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  }
+}

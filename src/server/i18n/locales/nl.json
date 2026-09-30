@@ -1,0 +1,156 @@
+{
+  "axes": {
+    "consistency": "Consistentie",
+    "tactical_read": "Tactisch inzicht",
+    "control": "Controle",
+    "serve": "Service",
+    "endurance": "Uithoudingsvermogen",
+    "positioning": "Positionering"
+  },
+  "common": {
+    "unsubBefore": "Als je wilt, kun je je ",
+    "unsubLink": "uitschrijven",
+    "unsubAfter": " hier."
+  },
+  "evaluation": {
+    "subject": "Nieuwe evaluatie beschikbaar",
+    "kicker": "NIEUWE EVALUATIE",
+    "heading": "Nieuwe evaluatie beschikbaar",
+    "sub": "Bekijk hoe je het deed in je laatste les. Bekijk je score, feedback en voortgang.",
+    "overallLabel": "Totaalscore",
+    "coachKicker": "COACH",
+    "lessonKicker": "LES",
+    "strengthKicker": "STERKSTE PUNT",
+    "cta": "Evaluatie bekijken",
+    "reason": "Je ontvangt deze e-mail omdat er een nieuwe evaluatie aan je profiel is toegevoegd.",
+    "text": "Nieuwe evaluatie beschikbaar.\n\nTotaal: {{score}}/100\nCoach: {{coach}}{{when}}{{strength}}\n\nBekijk de details in +54.",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\nSterkste punt: {{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "Les bevestigd — {{title}}",
+    "heading": "Les bevestigd",
+    "sub": "Je les is succesvol ingepland.",
+    "personCoach": "Coach",
+    "personStudent": "Leerling",
+    "date": "Datum",
+    "time": "Tijd",
+    "cta": "Boeking bekijken",
+    "reason": "Je ontvangt deze e-mail omdat je een les hebt geboekt bij +54.",
+    "text": "Je les met {{name}} is bevestigd.\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "Padelles met {{name}}."
+  },
+  "lessonRequest": {
+    "subject": "Nieuw lesverzoek — {{name}}",
+    "heading": "Nieuw lesverzoek",
+    "sub": "Een leerling heeft een les bij je aangevraagd. Bevestig of weiger het verzoek.",
+    "date": "Datum",
+    "time": "Tijd",
+    "person": "Leerling",
+    "cta": "Verzoek bekijken",
+    "reason": "Je ontvangt deze e-mail omdat een leerling een les bij je heeft aangevraagd.",
+    "text": "{{name}} heeft een les bij je aangevraagd.\n\n{{date}} · {{time}}\n\nBevestig of weiger het verzoek in +54."
+  },
+  "lessonDeclined": {
+    "subject": "Les afgewezen — {{date}}",
+    "heading": "Les afgewezen",
+    "sub": "{{coach}} heeft je lesaanvraag afgewezen.",
+    "date": "Datum",
+    "time": "Tijd",
+    "person": "Coach",
+    "motive": "Reden",
+    "cta": "Bekijk planning",
+    "reason": "Je ontvangt deze e-mail omdat een lesaanvraag is afgewezen.",
+    "text": "{{coach}} heeft je les afgewezen.\n\n{{date}} · {{time}}\n\nReden:\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "Wachtwoord opnieuw instellen — +54",
+    "heading": "Wachtwoord opnieuw instellen",
+    "intro": "We hebben een verzoek ontvangen om het wachtwoord van dit account opnieuw in te stellen.",
+    "openLink": "Open de onderstaande link (1 uur geldig):",
+    "cta": "Wachtwoord opnieuw instellen",
+    "copyUrl": "Of kopieer dit adres in je browser:",
+    "ignore": "Als je dit niet hebt aangevraagd, kun je deze e-mail negeren."
+  },
+  "passwordChanged": {
+    "subject": "Het wachtwoord van je +54-account is opnieuw ingesteld.",
+    "heading": "Het wachtwoord van je +54-account is opnieuw ingesteld.",
+    "greeting": "Hallo {{name}},",
+    "greetingNoName": "Hallo,",
+    "intro": "Het wachtwoord van je +54-account is succesvol opnieuw ingesteld.",
+    "ifYou": "Als jij deze wijziging hebt gemaakt, hoef je verder niets te doen.",
+    "ifNotYou": "Als je deze wijziging niet herkent, stel je wachtwoord meteen opnieuw in en controleer de beveiligingsinstellingen van je account:",
+    "cta": "Mijn wachtwoord opnieuw instellen",
+    "help": "Als je hulp nodig hebt, neem dan contact op met het +54-team.",
+    "signoffLead": "Met vriendelijke groet,",
+    "signoff": "Team +54",
+    "reason": "Je ontvangt deze e-mail omdat het wachtwoord van je account opnieuw is ingesteld."
+  },
+  "authOtp": {
+    "ignore": "Als je dit niet hebt aangevraagd, kun je deze e-mail negeren.",
+    "text": "Je +54-code is: {{code}}",
+    "emailVerification": {
+      "subject": "Bevestig je e-mail — +54",
+      "heading": "Bevestig je e-mail",
+      "sub": "Voer deze code in +54 in om je adres te bevestigen.",
+      "reason": "Je ontvangt deze e-mail omdat je een account bij +54 hebt aangemaakt."
+    },
+    "signIn": {
+      "subject": "Je inlogcode — +54",
+      "heading": "Je inlogcode",
+      "sub": "Voer deze code in +54 in om door te gaan.",
+      "reason": "Je ontvangt deze e-mail omdat iemand met dit adres probeerde in te loggen."
+    },
+    "forgetPassword": {
+      "subject": "Wachtwoord opnieuw instellen — +54",
+      "heading": "Wachtwoord opnieuw instellen",
+      "sub": "Voer deze code in +54 in om een nieuw wachtwoord te kiezen.",
+      "reason": "Je ontvangt deze e-mail omdat een wachtwoordreset is aangevraagd."
+    }
+  },
+  "authLink": {
+    "ignore": "Als je dit niet hebt aangevraagd, kun je deze e-mail negeren.",
+    "copyUrl": "Of kopieer dit adres in je browser:",
+    "text": "Open deze link:\n{{url}}",
+    "emailVerification": {
+      "subject": "Bevestig je e-mail — +54",
+      "heading": "Bevestig je e-mail",
+      "sub": "Open de knop hieronder om je adres te bevestigen.",
+      "cta": "E-mail bevestigen",
+      "reason": "Je ontvangt deze e-mail omdat je een account bij +54 hebt aangemaakt."
+    },
+    "signIn": {
+      "subject": "Inloggen bij +54",
+      "heading": "Inloggen bij +54",
+      "sub": "Open de knop hieronder om door te gaan.",
+      "cta": "Inloggen",
+      "reason": "Je ontvangt deze e-mail omdat iemand met dit adres probeerde in te loggen."
+    },
+    "forgetPassword": {
+      "subject": "Wachtwoord opnieuw instellen — +54",
+      "heading": "Wachtwoord opnieuw instellen",
+      "sub": "Open de knop hieronder om een nieuw wachtwoord te kiezen.",
+      "cta": "Wachtwoord opnieuw instellen",
+      "reason": "Je ontvangt deze e-mail omdat een wachtwoordreset is aangevraagd."
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  }
+}

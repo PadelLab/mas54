@@ -1,0 +1,198 @@
+{
+  "axes": {
+    "consistency": "Consistency",
+    "tactical_read": "Tactical read",
+    "control": "Control",
+    "serve": "Serve",
+    "endurance": "Endurance",
+    "positioning": "Positioning"
+  },
+  "common": {
+    "unsubBefore": "If you prefer, you can ",
+    "unsubLink": "unsubscribe",
+    "unsubAfter": " here."
+  },
+  "evaluation": {
+    "subject": "New evaluation available",
+    "kicker": "NEW EVALUATION",
+    "heading": "New evaluation available",
+    "sub": "See how you performed in your latest lesson. Review your score, feedback, and progress.",
+    "overallLabel": "Overall score",
+    "coachKicker": "COACH",
+    "lessonKicker": "LESSON",
+    "strengthKicker": "TOP STRENGTH",
+    "cta": "View evaluation",
+    "reason": "You're receiving this email because a new evaluation was added to your profile.",
+    "text": "New evaluation available.\n\nOverall: {{score}}/100\nCoach: {{coach}}{{when}}{{strength}}\n\nSee the details in +54.",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\nTop strength: {{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "Lesson confirmed — {{title}}",
+    "heading": "Lesson confirmed",
+    "sub": "Your lesson has been successfully scheduled.",
+    "personCoach": "Coach",
+    "personStudent": "Student",
+    "date": "Date",
+    "time": "Time",
+    "cta": "View booking",
+    "reason": "You are receiving this email because you booked a lesson with +54.",
+    "text": "Your lesson with {{name}} was confirmed.\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "Padel lesson with {{name}}."
+  },
+  "lessonRequest": {
+    "subject": "New lesson request — {{name}}",
+    "heading": "New lesson request",
+    "sub": "A student requested a lesson with you. Confirm or decline the request.",
+    "date": "Date",
+    "time": "Time",
+    "person": "Student",
+    "cta": "View request",
+    "reason": "You are receiving this email because a student requested a lesson with you.",
+    "text": "{{name}} requested a lesson with you.\n\n{{date}} · {{time}}\n\nConfirm or decline the request in +54."
+  },
+  "lessonDeclined": {
+    "subject": "Lesson declined — {{date}}",
+    "heading": "Lesson declined",
+    "sub": "{{coach}} declined your lesson request.",
+    "date": "Date",
+    "time": "Time",
+    "person": "Coach",
+    "motive": "Reason",
+    "cta": "View schedule",
+    "reason": "You're receiving this email because a lesson request was declined.",
+    "text": "{{coach}} declined your lesson.\n\n{{date}} · {{time}}\n\nReason:\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "Reset your password — +54",
+    "heading": "Reset your password",
+    "intro": "We received a request to reset the password for this account.",
+    "openLink": "Open the link below (valid for 1 hour):",
+    "cta": "Reset password",
+    "copyUrl": "Or copy this address into your browser:",
+    "ignore": "If you didn't request this, ignore this email."
+  },
+  "passwordChanged": {
+    "subject": "Your +54 account password has been reset.",
+    "heading": "Your +54 account password has been reset.",
+    "greeting": "Hello, {{name}},",
+    "greetingNoName": "Hello,",
+    "intro": "The password for your +54 account has been successfully reset.",
+    "ifYou": "If you made this change, no further action is needed.",
+    "ifNotYou": "If you don’t recognize this change, reset your password immediately and review your account security settings:",
+    "cta": "Reset my password",
+    "help": "If you need help, contact the +54 team.",
+    "signoffLead": "Best regards,",
+    "signoff": "+54 Team",
+    "reason": "You received this email because your account password was reset."
+  },
+  "authOtp": {
+    "ignore": "If you didn't request this, you can ignore this email.",
+    "text": "Your +54 code is: {{code}}",
+    "emailVerification": {
+      "subject": "Verify your email — +54",
+      "heading": "Verify your email",
+      "sub": "Enter this code in +54 to confirm your address.",
+      "reason": "You're receiving this email because you created an account at +54."
+    },
+    "signIn": {
+      "subject": "Your sign-in code — +54",
+      "heading": "Your sign-in code",
+      "sub": "Enter this code in +54 to continue.",
+      "reason": "You're receiving this email because someone tried to sign in with this address."
+    },
+    "forgetPassword": {
+      "subject": "Reset your password — +54",
+      "heading": "Reset your password",
+      "sub": "Enter this code in +54 to choose a new password.",
+      "reason": "You're receiving this email because a password reset was requested for this account."
+    }
+  },
+  "authLink": {
+    "ignore": "If you didn't request this, you can ignore this email.",
+    "copyUrl": "Or copy this address into your browser:",
+    "text": "Open this link:\n{{url}}",
+    "emailVerification": {
+      "subject": "Verify your email — +54",
+      "heading": "Verify your email",
+      "sub": "Open the button below to confirm your address.",
+      "cta": "Verify email",
+      "reason": "You're receiving this email because you created an account at +54."
+    },
+    "signIn": {
+      "subject": "Sign in to +54",
+      "heading": "Sign in to +54",
+      "sub": "Open the button below to continue.",
+      "cta": "Sign in",
+      "reason": "You're receiving this email because someone tried to sign in with this address."
+    },
+    "forgetPassword": {
+      "subject": "Reset your password — +54",
+      "heading": "Reset your password",
+      "sub": "Open the button below to choose a new password.",
+      "cta": "Reset password",
+      "reason": "You're receiving this email because a password reset was requested for this account."
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "studentWelcome": {
+    "subject": "Welcome to +54",
+    "heading": "",
+    "greeting": "Hello,",
+    "intro": "A warm welcome to our platform! We're glad to have you with us and hope your experience is productive and enjoyable.",
+    "body": "To get started, open the platform with the button below.",
+    "cta": "Open +54",
+    "openLink": "Open the platform here:",
+    "signoff": "Kind regards,",
+    "team": "+54 Team",
+    "reason": "You received this email because you created a +54 account."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  },
+  "licenseExpiringStudent": {
+    "subject": "Your +54 license is about to expire",
+    "heading": "Your license is about to expire",
+    "greeting": "Hi {{studentName}},",
+    "greetingNoName": "Hi,",
+    "intro": "Your +54 account license is about to expire.",
+    "action": "To renew it, please contact the +54 coaches. They will walk you through the next steps.",
+    "ignore": "If you already renewed, you can ignore this notice.",
+    "signoff": "Best,",
+    "team": "+54 Team",
+    "startLabel": "Start",
+    "endLabel": "End",
+    "reason": "You received this email because your +54 access license is about to expire."
+  },
+  "licenseExpiringStaff": {
+    "subject": "A student's license is about to expire",
+    "heading": "Student license about to expire",
+    "greeting": "Hi {{teacherName}},",
+    "greetingNoName": "Hi,",
+    "intro": "{{studentName}}'s license is about to expire.",
+    "action": "Please contact the student to support them through renewal and share the next steps.",
+    "ignore": "If renewal has already been handled, you can ignore this notice.",
+    "signoff": "Best,",
+    "team": "+54 Team",
+    "startLabel": "Start",
+    "endLabel": "End",
+    "studentLabel": "Student",
+    "studentFallback": "a student",
+    "reason": "You received this email because a +54 student's license is about to expire."
+  }
+}

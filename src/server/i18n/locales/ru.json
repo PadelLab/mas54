@@ -1,0 +1,156 @@
+{
+  "axes": {
+    "consistency": "Стабильность",
+    "tactical_read": "Тактическое чтение",
+    "control": "Контроль",
+    "serve": "Подача",
+    "endurance": "Выносливость",
+    "positioning": "Позиционирование"
+  },
+  "common": {
+    "unsubBefore": "Если хотите, вы можете ",
+    "unsubLink": "отписаться",
+    "unsubAfter": "."
+  },
+  "evaluation": {
+    "subject": "Доступна новая оценка",
+    "kicker": "НОВАЯ ОЦЕНКА",
+    "heading": "Доступна новая оценка",
+    "sub": "Посмотрите, как прошёл ваш последний урок. Проверьте баллы, отзыв и прогресс.",
+    "overallLabel": "Общий балл",
+    "coachKicker": "ТРЕНЕР",
+    "lessonKicker": "УРОК",
+    "strengthKicker": "СИЛЬНАЯ СТОРОНА",
+    "cta": "Смотреть оценку",
+    "reason": "Вы получили это письмо, потому что в ваш профиль добавлена новая оценка.",
+    "text": "Доступна новая оценка.\n\nОбщий балл: {{score}}/100\nТренер: {{coach}}{{when}}{{strength}}\n\nПодробности в +54.",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\nСильная сторона: {{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "Урок подтверждён — {{title}}",
+    "heading": "Урок подтверждён",
+    "sub": "Ваш урок успешно запланирован.",
+    "personCoach": "Тренер",
+    "personStudent": "Ученик",
+    "date": "Дата",
+    "time": "Время",
+    "cta": "Смотреть запись",
+    "reason": "Вы получили это письмо, потому что записались на урок в +54.",
+    "text": "Ваш урок с {{name}} подтверждён.\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "Урок падела с {{name}}."
+  },
+  "lessonRequest": {
+    "subject": "Новый запрос на урок — {{name}}",
+    "heading": "Новый запрос на урок",
+    "sub": "Ученик запросил урок с вами. Подтвердите или отклоните запрос.",
+    "date": "Дата",
+    "time": "Время",
+    "person": "Ученик",
+    "cta": "Смотреть запрос",
+    "reason": "Вы получили это письмо, потому что ученик запросил урок с вами.",
+    "text": "{{name}} запросил урок с вами.\n\n{{date}} · {{time}}\n\nПодтвердите или отклоните запрос в +54."
+  },
+  "lessonDeclined": {
+    "subject": "Занятие отклонено — {{date}}",
+    "heading": "Занятие отклонено",
+    "sub": "{{coach}} отклонил ваш запрос на занятие.",
+    "date": "Дата",
+    "time": "Время",
+    "person": "Тренер",
+    "motive": "Причина",
+    "cta": "Смотреть расписание",
+    "reason": "Вы получили это письмо, потому что запрос на занятие был отклонён.",
+    "text": "{{coach}} отклонил ваше занятие.\n\n{{date}} · {{time}}\n\nПричина:\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "Сброс пароля — +54",
+    "heading": "Сброс пароля",
+    "intro": "Мы получили запрос на сброс пароля для этого аккаунта.",
+    "openLink": "Откройте ссылку ниже (действует 1 час):",
+    "cta": "Сбросить пароль",
+    "copyUrl": "Или скопируйте этот адрес в браузер:",
+    "ignore": "Если это были не вы, проигнорируйте это письмо."
+  },
+  "passwordChanged": {
+    "subject": "Пароль вашей учётной записи +54 был сброшен.",
+    "heading": "Пароль вашей учётной записи +54 был сброшен.",
+    "greeting": "Здравствуйте, {{name}}!",
+    "greetingNoName": "Здравствуйте!",
+    "intro": "Пароль вашей учётной записи +54 был успешно сброшен.",
+    "ifYou": "Если это изменение сделали вы, никаких дополнительных действий не требуется.",
+    "ifNotYou": "Если вы не узнаёте это изменение, сразу сбросьте пароль и проверьте настройки безопасности аккаунта:",
+    "cta": "Сбросить мой пароль",
+    "help": "Если нужна помощь, свяжитесь с командой +54.",
+    "signoffLead": "С уважением,",
+    "signoff": "Команда +54",
+    "reason": "Вы получили это письмо, потому что пароль вашей учётной записи был сброшен."
+  },
+  "authOtp": {
+    "ignore": "Если вы этого не запрашивали, проигнорируйте это письмо.",
+    "text": "Ваш код +54: {{code}}",
+    "emailVerification": {
+      "subject": "Подтвердите почту — +54",
+      "heading": "Подтвердите почту",
+      "sub": "Введите этот код в +54, чтобы подтвердить адрес.",
+      "reason": "Вы получили это письмо, потому что создали аккаунт в +54."
+    },
+    "signIn": {
+      "subject": "Код входа — +54",
+      "heading": "Код входа",
+      "sub": "Введите этот код в +54, чтобы продолжить.",
+      "reason": "Вы получили это письмо, потому что кто-то пытался войти с этим адресом."
+    },
+    "forgetPassword": {
+      "subject": "Сброс пароля — +54",
+      "heading": "Сброс пароля",
+      "sub": "Введите этот код в +54, чтобы выбрать новый пароль.",
+      "reason": "Вы получили это письмо, потому что был запрошен сброс пароля."
+    }
+  },
+  "authLink": {
+    "ignore": "Если вы этого не запрашивали, проигнорируйте это письмо.",
+    "copyUrl": "Или скопируйте этот адрес в браузер:",
+    "text": "Откройте эту ссылку:\n{{url}}",
+    "emailVerification": {
+      "subject": "Подтвердите почту — +54",
+      "heading": "Подтвердите почту",
+      "sub": "Нажмите кнопку ниже, чтобы подтвердить адрес.",
+      "cta": "Подтвердить почту",
+      "reason": "Вы получили это письмо, потому что создали аккаунт в +54."
+    },
+    "signIn": {
+      "subject": "Вход в +54",
+      "heading": "Вход в +54",
+      "sub": "Нажмите кнопку ниже, чтобы продолжить.",
+      "cta": "Войти",
+      "reason": "Вы получили это письмо, потому что кто-то пытался войти с этим адресом."
+    },
+    "forgetPassword": {
+      "subject": "Сброс пароля — +54",
+      "heading": "Сброс пароля",
+      "sub": "Нажмите кнопку ниже, чтобы выбрать новый пароль.",
+      "cta": "Сбросить пароль",
+      "reason": "Вы получили это письмо, потому что был запрошен сброс пароля."
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  }
+}

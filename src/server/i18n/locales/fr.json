@@ -1,0 +1,156 @@
+{
+  "axes": {
+    "consistency": "Regularité",
+    "tactical_read": "Lecture tactique",
+    "control": "Contrôle",
+    "serve": "Service",
+    "endurance": "Endurance",
+    "positioning": "Positionnement"
+  },
+  "common": {
+    "unsubBefore": "Si vous préférez, vous pouvez ",
+    "unsubLink": "vous désabonner",
+    "unsubAfter": " ici."
+  },
+  "evaluation": {
+    "subject": "Nouvelle évaluation disponible",
+    "kicker": "NOUVELLE ÉVALUATION",
+    "heading": "Nouvelle évaluation disponible",
+    "sub": "Découvrez votre performance lors de votre dernière séance. Consultez votre score, les commentaires et vos progrès.",
+    "overallLabel": "Score global",
+    "coachKicker": "COACH",
+    "lessonKicker": "COURS",
+    "strengthKicker": "POINT FORT",
+    "cta": "Voir l'évaluation",
+    "reason": "Vous recevez cet e-mail parce qu'une nouvelle évaluation a été ajoutée à votre profil.",
+    "text": "Nouvelle évaluation disponible.\n\nGlobal : {{score}}/100\nCoach : {{coach}}{{when}}{{strength}}\n\nVoir le détail dans +54.",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\nPoint fort : {{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "Cours confirmé — {{title}}",
+    "heading": "Cours confirmé",
+    "sub": "Votre cours a bien été programmé.",
+    "personCoach": "Coach",
+    "personStudent": "Élève",
+    "date": "Date",
+    "time": "Heure",
+    "cta": "Voir la réservation",
+    "reason": "Vous recevez cet e-mail parce que vous avez réservé un cours avec +54.",
+    "text": "Votre cours avec {{name}} a été confirmé.\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "Cours de padel avec {{name}}."
+  },
+  "lessonRequest": {
+    "subject": "Nouvelle demande de cours — {{name}}",
+    "heading": "Nouvelle demande de cours",
+    "sub": "Un élève a demandé un cours avec vous. Confirmez ou refusez la demande.",
+    "date": "Date",
+    "time": "Heure",
+    "person": "Élève",
+    "cta": "Voir la demande",
+    "reason": "Vous recevez cet e-mail parce qu'un élève a demandé un cours avec vous.",
+    "text": "{{name}} a demandé un cours avec vous.\n\n{{date}} · {{time}}\n\nConfirmez ou refusez la demande dans +54."
+  },
+  "lessonDeclined": {
+    "subject": "Cours refusé — {{date}}",
+    "heading": "Cours refusé",
+    "sub": "{{coach}} a refusé votre demande de cours.",
+    "date": "Date",
+    "time": "Heure",
+    "person": "Coach",
+    "motive": "Motif",
+    "cta": "Voir le planning",
+    "reason": "Vous recevez cet e-mail parce qu’une demande de cours a été refusée.",
+    "text": "{{coach}} a refusé votre cours.\n\n{{date}} · {{time}}\n\nMotif :\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "Réinitialiser votre mot de passe — +54",
+    "heading": "Réinitialiser le mot de passe",
+    "intro": "Nous avons reçu une demande de réinitialisation du mot de passe de ce compte.",
+    "openLink": "Ouvrez le lien ci-dessous (valable 1 heure) :",
+    "cta": "Réinitialiser le mot de passe",
+    "copyUrl": "Ou copiez cette adresse dans votre navigateur :",
+    "ignore": "Si vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail."
+  },
+  "passwordChanged": {
+    "subject": "Le mot de passe de votre compte +54 a été réinitialisé.",
+    "heading": "Le mot de passe de votre compte +54 a été réinitialisé.",
+    "greeting": "Bonjour {{name}},",
+    "greetingNoName": "Bonjour,",
+    "intro": "Le mot de passe de votre compte +54 a été réinitialisé avec succès.",
+    "ifYou": "Si vous êtes à l’origine de ce changement, aucune autre action n’est nécessaire.",
+    "ifNotYou": "Si vous ne reconnaissez pas ce changement, réinitialisez votre mot de passe immédiatement et vérifiez les paramètres de sécurité de votre compte :",
+    "cta": "Réinitialiser mon mot de passe",
+    "help": "Si vous avez besoin d’aide, contactez l’équipe +54.",
+    "signoffLead": "Cordialement,",
+    "signoff": "L’équipe +54",
+    "reason": "Vous recevez cet e-mail parce que le mot de passe de votre compte a été réinitialisé."
+  },
+  "authOtp": {
+    "ignore": "Si vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail.",
+    "text": "Votre code +54 est : {{code}}",
+    "emailVerification": {
+      "subject": "Vérifiez votre e-mail — +54",
+      "heading": "Vérifiez votre e-mail",
+      "sub": "Saisissez ce code dans +54 pour confirmer votre adresse.",
+      "reason": "Vous recevez cet e-mail parce que vous avez créé un compte sur +54."
+    },
+    "signIn": {
+      "subject": "Votre code de connexion — +54",
+      "heading": "Votre code de connexion",
+      "sub": "Saisissez ce code dans +54 pour continuer.",
+      "reason": "Vous recevez cet e-mail parce que quelqu'un a tenté de se connecter avec cette adresse."
+    },
+    "forgetPassword": {
+      "subject": "Réinitialiser votre mot de passe — +54",
+      "heading": "Réinitialiser le mot de passe",
+      "sub": "Saisissez ce code dans +54 pour choisir un nouveau mot de passe.",
+      "reason": "Vous recevez cet e-mail parce qu'une réinitialisation du mot de passe a été demandée."
+    }
+  },
+  "authLink": {
+    "ignore": "Si vous n'êtes pas à l'origine de cette demande, ignorez cet e-mail.",
+    "copyUrl": "Ou copiez cette adresse dans votre navigateur :",
+    "text": "Ouvrez ce lien :\n{{url}}",
+    "emailVerification": {
+      "subject": "Vérifiez votre e-mail — +54",
+      "heading": "Vérifiez votre e-mail",
+      "sub": "Ouvrez le bouton ci-dessous pour confirmer votre adresse.",
+      "cta": "Vérifier l'e-mail",
+      "reason": "Vous recevez cet e-mail parce que vous avez créé un compte sur +54."
+    },
+    "signIn": {
+      "subject": "Connexion à +54",
+      "heading": "Connexion à +54",
+      "sub": "Ouvrez le bouton ci-dessous pour continuer.",
+      "cta": "Se connecter",
+      "reason": "Vous recevez cet e-mail parce que quelqu'un a tenté de se connecter avec cette adresse."
+    },
+    "forgetPassword": {
+      "subject": "Réinitialiser votre mot de passe — +54",
+      "heading": "Réinitialiser le mot de passe",
+      "sub": "Ouvrez le bouton ci-dessous pour choisir un nouveau mot de passe.",
+      "cta": "Réinitialiser le mot de passe",
+      "reason": "Vous recevez cet e-mail parce qu'une réinitialisation du mot de passe a été demandée."
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  }
+}

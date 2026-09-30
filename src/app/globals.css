@@ -1,0 +1,587 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --court: #0d3b2c;
+  --sand: #c4a574;
+  --accent: #e85d04;
+  --bg: #fafafa; /* zinc-50 — app light background (same as Settings) */
+  --chart-grid: #e2e8f0;
+  --chart-tick: #64748b;
+  --chart-tick-muted: #94a3b8;
+  /* react-phone-number-input: focus matches the app accent */
+  --PhoneInput-color--focus: var(--accent);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  color-scheme: light;
+}
+
+body {
+  @apply bg-zinc-50 text-zinc-900 antialiased;
+  overflow-x: clip;
+  max-width: 100%;
+  min-height: 100dvh;
+}
+
+@layer base {
+  img,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  /*
+   * iOS zooms if the input is < 16px. Keep 16px on mobile and Tailwind text-sm
+   * from the sm breakpoint up.
+   */
+  @media (max-width: 639px) {
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
+
+}
+
+/* Avoid autofill blue/yellow fill without removing the border or focus ring. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #27272a;
+  caret-color: #27272a;
+  box-shadow: 0 0 0 1000px #fff inset;
+  transition: background-color 99999s ease-out;
+}
+
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #27272a;
+  caret-color: #27272a;
+  border-color: #a1a1aa !important;
+  outline: none;
+  box-shadow: 0 0 0 1000px #fff inset;
+}
+
+/* Windows/Edge: the native password-reveal icon has a gray background. */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+/* Windows/Chrome: the native outline flashes black on click. */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]),
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):hover,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):focus,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):focus-visible,
+select,
+select:hover,
+select:focus,
+select:focus-visible,
+textarea,
+textarea:hover,
+textarea:focus,
+textarea:focus-visible {
+  outline: none;
+}
+
+.password-toggle,
+.password-toggle:hover,
+.password-toggle:focus,
+.password-toggle:focus-visible,
+.password-toggle:active {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html.dark input:-webkit-autofill,
+html.dark input:-webkit-autofill:hover,
+html.dark input:-webkit-autofill:active {
+  -webkit-text-fill-color: #f4f4f5;
+  caret-color: #f4f4f5;
+  box-shadow: 0 0 0 1000px #18181b inset;
+}
+
+html.dark input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f4f4f5;
+  caret-color: #f4f4f5;
+  border-color: #71717a !important;
+  outline: none;
+  box-shadow: 0 0 0 1000px #18181b inset;
+}
+
+/* Dark theme aligned with Preferences: near-black background, no colored body mesh */
+html.dark,
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html.dark body,
+html[data-theme="dark"] body,
+body.dark {
+  @apply bg-zinc-950 text-zinc-100;
+  background-image: none;
+}
+
+/* Landing follows html.dark the same way the rest of the app does. */
+.landing-page {
+  --landing-bg: #ffffff;
+  --landing-muted: #f4f5f7;
+  --landing-ink: #111827;
+  --landing-subtle: #71717a;
+  --landing-line: #e4e4e7;
+  --ink: var(--landing-ink);
+  background-color: var(--landing-bg);
+  color: var(--landing-ink);
+  color-scheme: inherit;
+  forced-color-adjust: none;
+}
+
+html.dark .landing-page,
+html[data-theme="dark"] .landing-page,
+body.dark .landing-page {
+  --landing-bg: #09090b;
+  --landing-muted: #18181b;
+  --landing-ink: #fafafa;
+  --landing-subtle: #a1a1aa;
+  --landing-line: #27272a;
+}
+
+.landing-surface {
+  background-color: var(--landing-bg);
+}
+
+.landing-surface-muted {
+  background-color: var(--landing-muted);
+}
+
+.landing-header-solid {
+  border-color: color-mix(in srgb, var(--landing-line) 80%, transparent);
+  background-color: color-mix(in srgb, var(--landing-bg) 90%, transparent);
+}
+
+.landing-marquee-fade-l,
+.landing-marquee-fade-r {
+  background-image: linear-gradient(to right, var(--landing-bg), transparent);
+}
+
+.landing-marquee-fade-r {
+  background-image: linear-gradient(to left, var(--landing-bg), transparent);
+}
+
+::selection {
+  @apply bg-accent/20 text-ink;
+}
+
+html.dark ::selection {
+  @apply bg-accent/30 text-zinc-100;
+}
+
+@layer utilities {
+  .glass {
+    @apply border border-white/60 bg-white/75 shadow-xl shadow-zinc-900/5 backdrop-blur-xl;
+  }
+
+  html.dark .glass {
+    @apply border-zinc-800/80 bg-zinc-900/85 shadow-black/40;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-sand via-accent to-sand-light;
+  }
+  .surface-card {
+    @apply rounded-3xl border border-zinc-200/80 bg-white/90 shadow-lg shadow-zinc-900/[0.04] backdrop-blur-sm;
+  }
+
+  /* Cards match Preferences (zinc-800 border, zinc-900 surface) */
+  html.dark .surface-card {
+    @apply border-zinc-800/90 bg-zinc-900/80 text-zinc-100 shadow-sm shadow-black/30;
+  }
+
+  /* Dashboard main area: same background as Preferences (no green/orange glow) */
+  html.dark .bg-mesh-dashboard {
+    background-image: none;
+    @apply bg-zinc-950;
+  }
+
+  /*
+   * Admin: `text-court` in dark → same hierarchy as Preferences (light titles, zinc-400 secondary).
+   * Does not change border-court / bg-court.
+   */
+  html.dark .text-court {
+    @apply text-zinc-50;
+  }
+  html.dark .text-court\/35 {
+    color: rgb(161 161 170 / 0.55);
+  }
+  html.dark .text-court\/40 {
+    color: rgb(161 161 170 / 0.6);
+  }
+  html.dark .text-court\/45 {
+    color: rgb(161 161 170 / 0.65);
+  }
+  html.dark .text-court\/50 {
+    color: rgb(161 161 170 / 0.7);
+  }
+  html.dark .text-court\/55 {
+    color: rgb(161 161 170 / 0.75);
+  }
+  html.dark .text-court\/60 {
+    @apply text-zinc-400;
+  }
+  html.dark .text-court\/65 {
+    @apply text-zinc-400;
+  }
+  html.dark .text-court\/70 {
+    @apply text-zinc-300;
+  }
+  html.dark .text-court\/75 {
+    @apply text-zinc-300;
+  }
+  html.dark .text-court\/80 {
+    @apply text-zinc-200;
+  }
+  html.dark .text-court\/90 {
+    @apply text-zinc-100;
+  }
+
+  html.dark .hover\:text-court:hover {
+    @apply text-zinc-50;
+  }
+  html.dark .placeholder\:text-court\/40::placeholder {
+    @apply text-zinc-500;
+  }
+
+  /**
+   * Thin rounded scrollbar in zinc colors (avoids the native Windows white scroll strip).
+   * Use on containers with overflow-y-auto / overflow-y-scroll.
+   */
+  .scrollbar-themed {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(161 161 170) rgb(244 244 245);
+  }
+  html.dark .scrollbar-themed {
+    scrollbar-color: rgb(82 82 91) rgb(24 24 27);
+  }
+  .scrollbar-themed::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .scrollbar-themed::-webkit-scrollbar-track {
+    background: rgb(244 244 245);
+    border-radius: 9999px;
+  }
+  html.dark .scrollbar-themed::-webkit-scrollbar-track {
+    background: rgb(24 24 27);
+  }
+  .scrollbar-themed::-webkit-scrollbar-thumb {
+    background: rgb(161 161 170);
+    border-radius: 9999px;
+    border: 2px solid rgb(244 244 245);
+  }
+  html.dark .scrollbar-themed::-webkit-scrollbar-thumb {
+    background: rgb(63 63 70);
+    border: 2px solid rgb(24 24 27);
+  }
+  .scrollbar-themed::-webkit-scrollbar-thumb:hover {
+    background: rgb(113 113 122);
+  }
+  html.dark .scrollbar-themed::-webkit-scrollbar-thumb:hover {
+    background: rgb(82 82 91);
+  }
+}
+
+/*
+ * react-phone-number-input: the native country <select> inherits the document's light
+ * color in dark mode; on Windows/Chrome options become light text on a light background.
+ */
+.PhoneInput .PhoneInputCountrySelect {
+  color-scheme: light;
+}
+
+.PhoneInput .PhoneInputCountrySelect option {
+  color: #0f172a;
+  background-color: #ffffff;
+}
+
+/* type=date: Chrome/Windows draws a dark native border; match the other fields. */
+input[type="date"],
+input[type="datetime-local"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Native date fields often grow taller than sibling selects; keep them on the same row. */
+.signup-page input[type="date"] {
+  box-sizing: border-box;
+  height: 3rem;
+  min-height: 3rem;
+  max-height: 3rem;
+}
+
+input[type="date"]:focus,
+input[type="datetime-local"]:focus {
+  outline: none;
+}
+
+/* type=date: Chrome adds inner padding and misaligns with the other fields. */
+input[type="date"]::-webkit-datetime-edit,
+input[type="date"]::-webkit-datetime-edit-fields-wrapper,
+input[type="date"]::-webkit-datetime-edit-text,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  padding: 0;
+}
+
+/*
+ * Calendar icon on type=date inputs in dark theme.
+ * - No color-scheme: dark on the input (Chrome painted the indicator black).
+ * - WebKit: light SVG icon instead of the native one (filter is unreliable).
+ */
+html.dark input[type="date"]::-webkit-calendar-picker-indicator,
+html.dark input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+.dark input[type="date"]::-webkit-calendar-picker-indicator,
+.dark input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  opacity: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  margin-inline-start: 0.25rem;
+  background: center / contain no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23f4f4f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+}
+
+html.dark input[type="date"]::-moz-calendar-picker-indicator,
+.dark input[type="date"]::-moz-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  filter: invert(1) brightness(1.25);
+}
+
+/*
+ * Clock on type=time inputs (dark theme): visible icon + dark native popup where the browser supports it.
+ */
+html.dark input[type="time"],
+.dark input[type="time"] {
+  color-scheme: dark;
+}
+
+html.dark input[type="time"]::-webkit-calendar-picker-indicator,
+.dark input[type="time"]::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  opacity: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  margin-inline-start: 0.25rem;
+  background: center / contain no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23f4f4f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='12 6 12 12 16 14'/%3E%3C/svg%3E");
+}
+
+html.dark input[type="time"]::-moz-calendar-picker-indicator,
+.dark input[type="time"]::-moz-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  filter: invert(1) brightness(1.25);
+}
+
+/* Overall: readable radar in dark theme (Recharts uses --chart-grid / --chart-tick) */
+html.dark {
+  --chart-grid: rgb(63 63 70 / 0.5);
+  --chart-tick: rgb(161 161 170);
+}
+
+/*
+ * Public signup: `color-scheme` follows html.dark (Preferences / system).
+ * Background grid: court tone in light, lime in dark.
+ */
+.signup-page {
+  color-scheme: light;
+}
+
+html.dark .signup-page {
+  color-scheme: dark;
+}
+
+html:not(.dark) .signup-page input[type="date"]::-webkit-calendar-picker-indicator,
+html:not(.dark) .signup-page input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  opacity: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  margin-inline-start: 0.25rem;
+  background: center / contain no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%230d3b2c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+}
+
+html.dark .signup-page input[type="date"]::-webkit-calendar-picker-indicator,
+html.dark .signup-page input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  opacity: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  padding: 0;
+  margin-inline-start: 0.25rem;
+  background: center / contain no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23d4d4d8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E");
+}
+
+html:not(.dark) .signup-page input[type="date"]::-moz-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  filter: none;
+}
+
+html.dark .signup-page input[type="date"]::-moz-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 1;
+  width: 1.25rem;
+  height: 1.25rem;
+  filter: invert(1) brightness(1.2);
+}
+
+.schedule-day-picker.rdp-root {
+  --rdp-accent-color: #18181b;
+  --rdp-accent-background-color: #fafafa;
+  --rdp-day-width: 2.25rem;
+  --rdp-day-height: 2.25rem;
+  --rdp-day_button-width: 2.15rem;
+  --rdp-day_button-height: 2.15rem;
+  --rdp-day_button-border-radius: 0.375rem;
+  --rdp-nav_button-width: 2rem;
+  --rdp-nav_button-height: 2rem;
+}
+
+html.dark .schedule-day-picker.rdp-root {
+  --rdp-accent-color: #f4f4f5;
+  --rdp-accent-background-color: #3f3f46;
+  --rdp-today-color: #fafafa;
+  --rdp-range_start-color: #18181b;
+  --rdp-range_end-color: #18181b;
+}
+
+.shadcn-day-picker.rdp-root {
+  --rdp-accent-color: #e85d04;
+  --rdp-accent-background-color: #ffedd5;
+  --rdp-day-width: 2.25rem;
+  --rdp-day-height: 2.25rem;
+  --rdp-day_button-width: 2.15rem;
+  --rdp-day_button-height: 2.15rem;
+  --rdp-day_button-border-radius: 0.5rem;
+  --rdp-nav_button-width: 2rem;
+  --rdp-nav_button-height: 2rem;
+}
+
+html.dark .shadcn-day-picker.rdp-root {
+  --rdp-accent-color: #fb923c;
+  --rdp-accent-background-color: #431407;
+  --rdp-today-color: #ffedd5;
+}
+
+/* Landing: scroll reveal. Plays again on the way up and down. */
+.landing-reveal-copy {
+  opacity: 0;
+  transform: translateY(36px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--landing-reveal-delay, 0ms),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) var(--landing-reveal-delay, 0ms);
+}
+
+.landing-reveal-copy.is-from-up {
+  transform: translateY(-36px);
+}
+
+.landing-reveal-copy.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.landing-reveal-media {
+  opacity: 0.28;
+  transform: scale(1.06) translateY(28px);
+  clip-path: inset(8% 10% 8% 10%);
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1) var(--landing-reveal-delay, 0ms),
+    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1) var(--landing-reveal-delay, 0ms),
+    clip-path 1.15s cubic-bezier(0.22, 1, 0.36, 1) var(--landing-reveal-delay, 0ms);
+}
+
+.landing-reveal-media.is-from-up {
+  transform: scale(1.06) translateY(-28px);
+}
+
+.landing-reveal-media.is-visible {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+
+@keyframes landing-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+.landing-marquee-track {
+  animation: landing-marquee 38s linear infinite;
+}
+
+.landing-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-reveal-copy,
+  .landing-reveal-media {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: none;
+  }
+
+  .landing-marquee-track {
+    animation: none;
+  }
+}
+
+.landing-media-zoom img {
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.landing-media-zoom:hover img {
+  transform: scale(1.07);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-media-zoom img,
+  .landing-media-zoom:hover img {
+    transform: none;
+    transition: none;
+  }
+}

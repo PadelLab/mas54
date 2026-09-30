@@ -1,0 +1,40 @@
+.tmp/
+.env
+.env.*
+!.env.example
+
+# Editor — Cursor rules are local, not used in production
+.cursor/
+#
+# Drizzle Kit history — runtime schema is src/server/padellab/ddl.ts (Neon)
+/drizzle/
+
+# Local database (Docker) — production uses Neon
+/database/
+/docker/
+docker-compose.yml
+docker-compose.*.yml
+ 
+
+# dependencies
+node_modules/
+
+# next.js / local caches
+.next/
+out/
+.turbo/
+coverage/
+
+# misc
+.DS_Store
+*.pem
+tsconfig.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# vercel
+.vercel/
+
+# typescript
+*.tsbuildinfo

@@ -1,0 +1,156 @@
+{
+  "axes": {
+    "consistency": "Konstanz",
+    "tactical_read": "Taktisches Lesen",
+    "control": "Kontrolle",
+    "serve": "Aufschlag",
+    "endurance": "Ausdauer",
+    "positioning": "Positionierung"
+  },
+  "common": {
+    "unsubBefore": "Wenn Sie möchten, können Sie sich ",
+    "unsubLink": "abmelden",
+    "unsubAfter": "."
+  },
+  "evaluation": {
+    "subject": "Neue Bewertung verfügbar",
+    "kicker": "NEUE BEWERTUNG",
+    "heading": "Neue Bewertung verfügbar",
+    "sub": "Sehen Sie, wie Sie in Ihrer letzten Stunde abgeschnitten haben. Prüfen Sie Ihre Punktzahl, das Feedback und Ihren Fortschritt.",
+    "overallLabel": "Gesamtwertung",
+    "coachKicker": "TRAINER",
+    "lessonKicker": "STUNDE",
+    "strengthKicker": "STÄRKE",
+    "cta": "Bewertung ansehen",
+    "reason": "Sie erhalten diese E-Mail, weil Ihrem Profil eine neue Bewertung hinzugefügt wurde.",
+    "text": "Neue Bewertung verfügbar.\n\nGesamt: {{score}}/100\nTrainer: {{coach}}{{when}}{{strength}}\n\nDetails in +54 ansehen.",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\nStärke: {{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "Stunde bestätigt — {{title}}",
+    "heading": "Stunde bestätigt",
+    "sub": "Ihre Stunde wurde erfolgreich geplant.",
+    "personCoach": "Trainer",
+    "personStudent": "Schüler",
+    "date": "Datum",
+    "time": "Uhrzeit",
+    "cta": "Buchung ansehen",
+    "reason": "Sie erhalten diese E-Mail, weil Sie eine Stunde bei +54 gebucht haben.",
+    "text": "Ihre Stunde mit {{name}} wurde bestätigt.\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "Padel-Stunde mit {{name}}."
+  },
+  "lessonRequest": {
+    "subject": "Neue Stundenanfrage — {{name}}",
+    "heading": "Neue Stundenanfrage",
+    "sub": "Ein Schüler hat eine Stunde bei Ihnen angefragt. Bestätigen oder ablehnen Sie die Anfrage.",
+    "date": "Datum",
+    "time": "Uhrzeit",
+    "person": "Schüler",
+    "cta": "Anfrage ansehen",
+    "reason": "Sie erhalten diese E-Mail, weil ein Schüler eine Stunde bei Ihnen angefragt hat.",
+    "text": "{{name}} hat eine Stunde bei Ihnen angefragt.\n\n{{date}} · {{time}}\n\nBestätigen oder ablehnen Sie die Anfrage in +54."
+  },
+  "lessonDeclined": {
+    "subject": "Stunde abgelehnt — {{date}}",
+    "heading": "Stunde abgelehnt",
+    "sub": "{{coach}} hat Ihre Stundenanfrage abgelehnt.",
+    "date": "Datum",
+    "time": "Uhrzeit",
+    "person": "Trainer",
+    "motive": "Grund",
+    "cta": "Zeitplan ansehen",
+    "reason": "Sie erhalten diese E-Mail, weil eine Stundenanfrage abgelehnt wurde.",
+    "text": "{{coach}} hat Ihre Stunde abgelehnt.\n\n{{date}} · {{time}}\n\nGrund:\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "Passwort zurücksetzen — +54",
+    "heading": "Passwort zurücksetzen",
+    "intro": "Wir haben eine Anfrage zum Zurücksetzen des Passworts für dieses Konto erhalten.",
+    "openLink": "Öffnen Sie den Link unten (gültig für 1 Stunde):",
+    "cta": "Passwort zurücksetzen",
+    "copyUrl": "Oder kopieren Sie diese Adresse in Ihren Browser:",
+    "ignore": "Wenn Sie das nicht waren, ignorieren Sie diese E-Mail."
+  },
+  "passwordChanged": {
+    "subject": "Das Passwort Ihres +54-Kontos wurde zurückgesetzt.",
+    "heading": "Das Passwort Ihres +54-Kontos wurde zurückgesetzt.",
+    "greeting": "Hallo {{name}},",
+    "greetingNoName": "Hallo,",
+    "intro": "Das Passwort Ihres +54-Kontos wurde erfolgreich zurückgesetzt.",
+    "ifYou": "Wenn Sie diese Änderung vorgenommen haben, ist keine weitere Aktion erforderlich.",
+    "ifNotYou": "Wenn Sie diese Änderung nicht erkennen, setzen Sie Ihr Passwort sofort zurück und prüfen Sie die Sicherheitseinstellungen Ihres Kontos:",
+    "cta": "Mein Passwort zurücksetzen",
+    "help": "Wenn Sie Hilfe benötigen, wenden Sie sich an das +54-Team.",
+    "signoffLead": "Mit freundlichen Grüßen",
+    "signoff": "Team +54",
+    "reason": "Sie erhalten diese E-Mail, weil das Passwort Ihres Kontos zurückgesetzt wurde."
+  },
+  "authOtp": {
+    "ignore": "Wenn Sie das nicht angefordert haben, ignorieren Sie diese E-Mail.",
+    "text": "Dein +54-Code lautet: {{code}}",
+    "emailVerification": {
+      "subject": "E-Mail bestätigen — +54",
+      "heading": "E-Mail bestätigen",
+      "sub": "Gib diesen Code in +54 ein, um deine Adresse zu bestätigen.",
+      "reason": "Du erhältst diese E-Mail, weil du ein Konto bei +54 erstellt hast."
+    },
+    "signIn": {
+      "subject": "Dein Anmeldecode — +54",
+      "heading": "Dein Anmeldecode",
+      "sub": "Gib diesen Code in +54 ein, um fortzufahren.",
+      "reason": "Du erhältst diese E-Mail, weil jemand versucht hat, sich mit dieser Adresse anzumelden."
+    },
+    "forgetPassword": {
+      "subject": "Passwort zurücksetzen — +54",
+      "heading": "Passwort zurücksetzen",
+      "sub": "Gib diesen Code in +54 ein, um ein neues Passwort zu wählen.",
+      "reason": "Du erhältst diese E-Mail, weil ein Passwort-Reset angefordert wurde."
+    }
+  },
+  "authLink": {
+    "ignore": "Wenn Sie das nicht angefordert haben, ignorieren Sie diese E-Mail.",
+    "copyUrl": "Oder kopieren Sie diese Adresse in Ihren Browser:",
+    "text": "Öffne diesen Link:\n{{url}}",
+    "emailVerification": {
+      "subject": "E-Mail bestätigen — +54",
+      "heading": "E-Mail bestätigen",
+      "sub": "Öffne die Schaltfläche unten, um deine Adresse zu bestätigen.",
+      "cta": "E-Mail bestätigen",
+      "reason": "Du erhältst diese E-Mail, weil du ein Konto bei +54 erstellt hast."
+    },
+    "signIn": {
+      "subject": "Bei +54 anmelden",
+      "heading": "Bei +54 anmelden",
+      "sub": "Öffne die Schaltfläche unten, um fortzufahren.",
+      "cta": "Anmelden",
+      "reason": "Du erhältst diese E-Mail, weil jemand versucht hat, sich mit dieser Adresse anzumelden."
+    },
+    "forgetPassword": {
+      "subject": "Passwort zurücksetzen — +54",
+      "heading": "Passwort zurücksetzen",
+      "sub": "Öffne die Schaltfläche unten, um ein neues Passwort zu wählen.",
+      "cta": "Passwort zurücksetzen",
+      "reason": "Du erhältst diese E-Mail, weil ein Passwort-Reset angefordert wurde."
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  }
+}

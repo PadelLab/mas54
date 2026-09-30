@@ -1,0 +1,198 @@
+{
+  "axes": {
+    "consistency": "Consistência",
+    "tactical_read": "Leitura tática",
+    "control": "Controle",
+    "serve": "Saque",
+    "endurance": "Resistência",
+    "positioning": "Posicionamento"
+  },
+  "common": {
+    "unsubBefore": "Se preferir, você pode ",
+    "unsubLink": "cancelar a inscrição",
+    "unsubAfter": " aqui."
+  },
+  "evaluation": {
+    "subject": "Nova avaliação disponível",
+    "kicker": "NOVA AVALIAÇÃO",
+    "heading": "Nova avaliação disponível",
+    "sub": "Veja como foi sua última aula. Confira a pontuação, o feedback e o progresso.",
+    "overallLabel": "Pontuação geral",
+    "coachKicker": "TREINADOR",
+    "lessonKicker": "AULA",
+    "strengthKicker": "PRINCIPAL FORÇA",
+    "cta": "Ver avaliação",
+    "reason": "Você recebeu este e-mail porque uma nova avaliação foi adicionada ao seu perfil.",
+    "text": "Nova avaliação disponível.\n\nGeral: {{score}}/100\nTreinador: {{coach}}{{when}}{{strength}}\n\nVeja os detalhes em +54.",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\nForça: {{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "Aula confirmada — {{title}}",
+    "heading": "Aula confirmada",
+    "sub": "Sua aula foi agendada com sucesso.",
+    "personCoach": "Treinador",
+    "personStudent": "Aluno",
+    "date": "Data",
+    "time": "Hora",
+    "cta": "Ver reserva",
+    "reason": "Você recebeu este e-mail porque agendou uma aula com +54.",
+    "text": "Sua aula com {{name}} foi confirmada.\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "Aula de padel com {{name}}."
+  },
+  "lessonRequest": {
+    "subject": "Novo pedido de aula — {{name}}",
+    "heading": "Novo pedido de aula",
+    "sub": "Um aluno pediu aula com você. Confirme ou recuse o pedido.",
+    "date": "Data",
+    "time": "Hora",
+    "person": "Aluno",
+    "cta": "Ver pedido",
+    "reason": "Você recebeu este e-mail porque um aluno pediu aula com você.",
+    "text": "{{name}} pediu aula com você.\n\n{{date}} · {{time}}\n\nConfirme ou recuse o pedido em +54."
+  },
+  "lessonDeclined": {
+    "subject": "Aula recusada — {{date}}",
+    "heading": "Aula recusada",
+    "sub": "{{coach}} recusou seu pedido de aula.",
+    "date": "Data",
+    "time": "Hora",
+    "person": "Treinador",
+    "motive": "Motivo",
+    "cta": "Ver agenda",
+    "reason": "Você recebeu este e-mail porque um pedido de aula foi recusado.",
+    "text": "{{coach}} recusou sua aula.\n\n{{date}} · {{time}}\n\nMotivo:\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "Redefinir sua senha — +54",
+    "heading": "Redefinir senha",
+    "intro": "Recebemos um pedido para redefinir a senha desta conta.",
+    "openLink": "Abra o link abaixo (válido por 1 hora):",
+    "cta": "Redefinir senha",
+    "copyUrl": "Ou copie este endereço para o navegador:",
+    "ignore": "Se não foi você, ignore este e-mail."
+  },
+  "passwordChanged": {
+    "subject": "A senha da sua conta +54 foi redefinida.",
+    "heading": "A senha da sua conta +54 foi redefinida.",
+    "greeting": "Olá, {{name}},",
+    "greetingNoName": "Olá,",
+    "intro": "A senha da sua conta foi redefinida com sucesso.",
+    "ifYou": "Se foi você quem realizou essa alteração, nenhuma ação adicional é necessária.",
+    "ifNotYou": "Caso não reconheça essa alteração, redefina sua senha imediatamente e revise as configurações de segurança da sua conta:",
+    "cta": "Redefinir minha senha",
+    "help": "Se precisar de ajuda, entre em contato com a equipe do +54.",
+    "signoffLead": "Atenciosamente,",
+    "signoff": "Equipe +54",
+    "reason": "Você recebeu este e-mail porque a senha da sua conta foi redefinida."
+  },
+  "authOtp": {
+    "ignore": "Se você não pediu isso, pode ignorar este e-mail.",
+    "text": "Seu código +54 é: {{code}}",
+    "emailVerification": {
+      "subject": "Verifique seu e-mail — +54",
+      "heading": "Verifique seu e-mail",
+      "sub": "Digite este código em +54 para confirmar seu endereço.",
+      "reason": "Você recebeu este e-mail porque criou uma conta no +54."
+    },
+    "signIn": {
+      "subject": "Seu código de acesso — +54",
+      "heading": "Seu código de acesso",
+      "sub": "Digite este código em +54 para continuar.",
+      "reason": "Você recebeu este e-mail porque alguém tentou entrar com este endereço."
+    },
+    "forgetPassword": {
+      "subject": "Redefinir sua senha — +54",
+      "heading": "Redefinir senha",
+      "sub": "Digite este código em +54 para escolher uma senha nova.",
+      "reason": "Você recebeu este e-mail porque foi pedida a redefinição da senha desta conta."
+    }
+  },
+  "authLink": {
+    "ignore": "Se você não pediu isso, pode ignorar este e-mail.",
+    "copyUrl": "Ou copie este endereço para o navegador:",
+    "text": "Abra este link:\n{{url}}",
+    "emailVerification": {
+      "subject": "Verifique seu e-mail — +54",
+      "heading": "Verifique seu e-mail",
+      "sub": "Abra o botão abaixo para confirmar seu endereço.",
+      "cta": "Verificar e-mail",
+      "reason": "Você recebeu este e-mail porque criou uma conta no +54."
+    },
+    "signIn": {
+      "subject": "Entrar no +54",
+      "heading": "Entrar no +54",
+      "sub": "Abra o botão abaixo para continuar.",
+      "cta": "Entrar",
+      "reason": "Você recebeu este e-mail porque alguém tentou entrar com este endereço."
+    },
+    "forgetPassword": {
+      "subject": "Redefinir sua senha — +54",
+      "heading": "Redefinir senha",
+      "sub": "Abra o botão abaixo para escolher uma senha nova.",
+      "cta": "Redefinir senha",
+      "reason": "Você recebeu este e-mail porque foi pedida a redefinição da senha desta conta."
+    }
+  },
+  "staffCredentials": {
+    "subject": "Seus dados de acesso — +54",
+    "heading": "Seus dados de acesso",
+    "greeting": "Olá, {{name}},",
+    "greetingNoName": "Olá,",
+    "intro": "Confira abaixo seus dados de acesso.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Senha temporária",
+    "mustChange": "Por segurança, altere a senha no primeiro acesso.",
+    "openLink": "Entre aqui:",
+    "cta": "Entrar",
+    "reason": "Esta é uma notificação automática do +54. Por favor, não responda a este e-mail."
+  },
+  "studentWelcome": {
+    "subject": "Bem-vindo à +54",
+    "heading": "",
+    "greeting": "Olá,",
+    "intro": "Seja muito bem-vindo(a) ao nosso sistema! Estamos felizes em tê-lo(a) conosco e esperamos que sua experiência seja produtiva e agradável.",
+    "body": "Para começar, acesse a plataforma pelo botão abaixo.",
+    "cta": "Acessar +54",
+    "openLink": "Acesse a plataforma aqui:",
+    "signoff": "Atenciosamente,",
+    "team": "Equipe +54",
+    "reason": "Você recebeu este e-mail porque criou uma conta na +54."
+  },
+  "accountDeleted": {
+    "subject": "Sua conta foi excluída — +54",
+    "heading": "Obrigado pelo tempo conosco",
+    "body": "Confirmamos que sua conta foi excluída. Obrigado por ter estado conosco — agradecemos de verdade por ter experimentado o +54.",
+    "reason": "Você recebeu este e-mail porque sua conta no +54 foi excluída."
+  },
+  "licenseExpiringStudent": {
+    "subject": "Sua licença da +54 está prestes a vencer",
+    "heading": "Sua licença está prestes a vencer",
+    "greeting": "Olá {{studentName}},",
+    "greetingNoName": "Olá,",
+    "intro": "Informamos que a licença da sua conta +54 está prestes a vencer.",
+    "action": "Para renovar, entre em contato com os professores da +54. Eles vão indicar os próximos passos.",
+    "ignore": "Se a renovação já foi feita, pode ignorar este aviso.",
+    "signoff": "Abraços,",
+    "team": "Equipe +54",
+    "startLabel": "Início",
+    "endLabel": "Fim",
+    "reason": "Você recebeu este e-mail porque sua licença de acesso à +54 está próxima de vencer."
+  },
+  "licenseExpiringStaff": {
+    "subject": "A licença de um aluno está prestes a vencer",
+    "heading": "Licença de aluno prestes a vencer",
+    "greeting": "Olá {{teacherName}},",
+    "greetingNoName": "Olá,",
+    "intro": "Informamos que a licença de {{studentName}} está prestes a vencer.",
+    "action": "Por favor, entre em contato com o aluno para acompanhá-lo na renovação e indicar os próximos passos.",
+    "ignore": "Se a renovação já foi feita, pode ignorar este aviso.",
+    "signoff": "Abraços,",
+    "team": "Equipe +54",
+    "startLabel": "Início",
+    "endLabel": "Fim",
+    "studentLabel": "Aluno",
+    "studentFallback": "um aluno",
+    "reason": "Você recebeu este e-mail porque um aluno da +54 tem a licença próxima de vencer."
+  }
+}

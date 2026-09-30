@@ -1,0 +1,156 @@
+{
+  "axes": {
+    "consistency": "Konsystencja",
+    "tactical_read": "Czytanie taktyczne",
+    "control": "Kontrola",
+    "serve": "Serwis",
+    "endurance": "Wytrzymałość",
+    "positioning": "Ustawienie"
+  },
+  "common": {
+    "unsubBefore": "Jeśli wolisz, możesz ",
+    "unsubLink": "wypisać się",
+    "unsubAfter": " tutaj."
+  },
+  "evaluation": {
+    "subject": "Nowa ocena jest dostępna",
+    "kicker": "NOWA OCENA",
+    "heading": "Nowa ocena jest dostępna",
+    "sub": "Zobacz, jak poszło Ci na ostatniej lekcji. Sprawdź wynik, opinię i postępy.",
+    "overallLabel": "Wynik ogólny",
+    "coachKicker": "TRENER",
+    "lessonKicker": "LEKCJA",
+    "strengthKicker": "GŁÓWNA MOCNA STRONA",
+    "cta": "Zobacz ocenę",
+    "reason": "Otrzymujesz tę wiadomość, ponieważ do Twojego profilu dodano nową ocenę.",
+    "text": "Nowa ocena jest dostępna.\n\nOgółem: {{score}}/100\nTrener: {{coach}}{{when}}{{strength}}\n\nSzczegóły znajdziesz w +54.",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\nMocna strona: {{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "Lekcja potwierdzona — {{title}}",
+    "heading": "Lekcja potwierdzona",
+    "sub": "Twoja lekcja została pomyślnie zaplanowana.",
+    "personCoach": "Trener",
+    "personStudent": "Uczeń",
+    "date": "Data",
+    "time": "Godzina",
+    "cta": "Zobacz rezerwację",
+    "reason": "Otrzymujesz tę wiadomość, ponieważ zarezerwowałeś lekcję w +54.",
+    "text": "Twoja lekcja z {{name}} została potwierdzona.\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "Lekcja padla z {{name}}."
+  },
+  "lessonRequest": {
+    "subject": "Nowa prośba o lekcję — {{name}}",
+    "heading": "Nowa prośba o lekcję",
+    "sub": "Uczeń poprosił o lekcję z Tobą. Potwierdź lub odrzuć prośbę.",
+    "date": "Data",
+    "time": "Godzina",
+    "person": "Uczeń",
+    "cta": "Zobacz prośbę",
+    "reason": "Otrzymujesz tę wiadomość, ponieważ uczeń poprosił o lekcję z Tobą.",
+    "text": "{{name}} poprosił o lekcję z Tobą.\n\n{{date}} · {{time}}\n\nPotwierdź lub odrzuć prośbę w +54."
+  },
+  "lessonDeclined": {
+    "subject": "Lekcja odrzucona — {{date}}",
+    "heading": "Lekcja odrzucona",
+    "sub": "{{coach}} odrzucił Twoją prośbę o lekcję.",
+    "date": "Data",
+    "time": "Godzina",
+    "person": "Trener",
+    "motive": "Powód",
+    "cta": "Zobacz harmonogram",
+    "reason": "Otrzymujesz tę wiadomość, ponieważ prośba o lekcję została odrzucona.",
+    "text": "{{coach}} odrzucił Twoją lekcję.\n\n{{date}} · {{time}}\n\nPowód:\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "Zresetuj hasło — +54",
+    "heading": "Zresetuj hasło",
+    "intro": "Otrzymaliśmy prośbę o zresetowanie hasła do tego konta.",
+    "openLink": "Otwórz poniższy link (ważny przez 1 godzinę):",
+    "cta": "Zresetuj hasło",
+    "copyUrl": "Lub skopiuj ten adres do przeglądarki:",
+    "ignore": "Jeśli to nie Ty, zignoruj tę wiadomość."
+  },
+  "passwordChanged": {
+    "subject": "Hasło do Twojego konta +54 zostało zresetowane.",
+    "heading": "Hasło do Twojego konta +54 zostało zresetowane.",
+    "greeting": "Witaj, {{name}},",
+    "greetingNoName": "Witaj,",
+    "intro": "Hasło do Twojego konta +54 zostało pomyślnie zresetowane.",
+    "ifYou": "Jeśli to Ty dokonałeś tej zmiany, nie musisz nic więcej robić.",
+    "ifNotYou": "Jeśli nie rozpoznajesz tej zmiany, natychmiast zresetuj hasło i sprawdź ustawienia bezpieczeństwa konta:",
+    "cta": "Zresetuj moje hasło",
+    "help": "Jeśli potrzebujesz pomocy, skontaktuj się z zespołem +54.",
+    "signoffLead": "Pozdrawiamy,",
+    "signoff": "Zespół +54",
+    "reason": "Otrzymujesz tę wiadomość, ponieważ hasło do Twojego konta zostało zresetowane."
+  },
+  "authOtp": {
+    "ignore": "Jeśli tego nie prosiłeś, zignoruj tę wiadomość.",
+    "text": "Twój kod +54 to: {{code}}",
+    "emailVerification": {
+      "subject": "Zweryfikuj e-mail — +54",
+      "heading": "Zweryfikuj e-mail",
+      "sub": "Wpisz ten kod w +54, aby potwierdzić adres.",
+      "reason": "Otrzymujesz tę wiadomość, ponieważ utworzyłeś konto w +54."
+    },
+    "signIn": {
+      "subject": "Twój kod logowania — +54",
+      "heading": "Twój kod logowania",
+      "sub": "Wpisz ten kod w +54, aby kontynuować.",
+      "reason": "Otrzymujesz tę wiadomość, ponieważ ktoś próbował zalogować się na ten adres."
+    },
+    "forgetPassword": {
+      "subject": "Zresetuj hasło — +54",
+      "heading": "Zresetuj hasło",
+      "sub": "Wpisz ten kod w +54, aby wybrać nowe hasło.",
+      "reason": "Otrzymujesz tę wiadomość, ponieważ poproszono o reset hasła."
+    }
+  },
+  "authLink": {
+    "ignore": "Jeśli tego nie prosiłeś, zignoruj tę wiadomość.",
+    "copyUrl": "Lub skopiuj ten adres do przeglądarki:",
+    "text": "Otwórz ten link:\n{{url}}",
+    "emailVerification": {
+      "subject": "Zweryfikuj e-mail — +54",
+      "heading": "Zweryfikuj e-mail",
+      "sub": "Otwórz przycisk poniżej, aby potwierdzić adres.",
+      "cta": "Zweryfikuj e-mail",
+      "reason": "Otrzymujesz tę wiadomość, ponieważ utworzyłeś konto w +54."
+    },
+    "signIn": {
+      "subject": "Zaloguj się do +54",
+      "heading": "Zaloguj się do +54",
+      "sub": "Otwórz przycisk poniżej, aby kontynuować.",
+      "cta": "Zaloguj się",
+      "reason": "Otrzymujesz tę wiadomość, ponieważ ktoś próbował zalogować się na ten adres."
+    },
+    "forgetPassword": {
+      "subject": "Zresetuj hasło — +54",
+      "heading": "Zresetuj hasło",
+      "sub": "Otwórz przycisk poniżej, aby wybrać nowe hasło.",
+      "cta": "Zresetuj hasło",
+      "reason": "Otrzymujesz tę wiadomość, ponieważ poproszono o reset hasła."
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  }
+}

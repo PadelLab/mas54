@@ -1,0 +1,156 @@
+{
+  "axes": {
+    "consistency": "稳定性",
+    "tactical_read": "战术阅读",
+    "control": "控球",
+    "serve": "发球",
+    "endurance": "耐力",
+    "positioning": "站位"
+  },
+  "common": {
+    "unsubBefore": "如果你愿意，可以",
+    "unsubLink": "取消订阅",
+    "unsubAfter": "。"
+  },
+  "evaluation": {
+    "subject": "新的评估已发布",
+    "kicker": "新评估",
+    "heading": "新的评估已发布",
+    "sub": "查看你在最近一节课中的表现。查看得分、反馈和进步。",
+    "overallLabel": "总分",
+    "coachKicker": "教练",
+    "lessonKicker": "课程",
+    "strengthKicker": "最大优势",
+    "cta": "查看评估",
+    "reason": "你收到此邮件是因为你的个人资料中新增了一份评估。",
+    "text": "新的评估已发布。\n\n总分：{{score}}/100\n教练：{{coach}}{{when}}{{strength}}\n\n在 +54 中查看详情。",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\n最大优势：{{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "课程已确认 — {{title}}",
+    "heading": "课程已确认",
+    "sub": "你的课程已成功预约。",
+    "personCoach": "教练",
+    "personStudent": "学员",
+    "date": "日期",
+    "time": "时间",
+    "cta": "查看预约",
+    "reason": "你收到此邮件是因为你在 +54 预约了一节课。",
+    "text": "你与 {{name}} 的课程已确认。\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "与 {{name}} 的帕德尔课程。"
+  },
+  "lessonRequest": {
+    "subject": "新的课程申请 — {{name}}",
+    "heading": "新的课程申请",
+    "sub": "有学员向你申请了一节课。请确认或拒绝该申请。",
+    "date": "日期",
+    "time": "时间",
+    "person": "学员",
+    "cta": "查看申请",
+    "reason": "你收到此邮件是因为有学员向你申请了一节课。",
+    "text": "{{name}} 向你申请了一节课。\n\n{{date}} · {{time}}\n\n请在 +54 中确认或拒绝该申请。"
+  },
+  "lessonDeclined": {
+    "subject": "课程已拒绝 — {{date}}",
+    "heading": "课程已拒绝",
+    "sub": "{{coach}} 拒绝了你的课程申请。",
+    "date": "日期",
+    "time": "时间",
+    "person": "教练",
+    "motive": "原因",
+    "cta": "查看日程",
+    "reason": "你收到此邮件是因为一节课程申请被拒绝。",
+    "text": "{{coach}} 拒绝了你的课程。\n\n{{date}} · {{time}}\n\n原因：\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "重置密码 — +54",
+    "heading": "重置密码",
+    "intro": "我们收到了重置此账户密码的请求。",
+    "openLink": "打开下方链接（1 小时内有效）：",
+    "cta": "重置密码",
+    "copyUrl": "或将此地址复制到浏览器：",
+    "ignore": "如果你没有提出此请求，请忽略这封邮件。"
+  },
+  "passwordChanged": {
+    "subject": "你的 +54 账户密码已重置。",
+    "heading": "你的 +54 账户密码已重置。",
+    "greeting": "{{name}}，你好：",
+    "greetingNoName": "你好：",
+    "intro": "你的 +54 账户密码已成功重置。",
+    "ifYou": "如果是你本人进行的更改，无需采取其他操作。",
+    "ifNotYou": "如果无法确认此更改，请立即重置密码并检查账户安全设置：",
+    "cta": "重置我的密码",
+    "help": "如需帮助，请联系 +54 团队。",
+    "signoffLead": "此致",
+    "signoff": "+54 团队",
+    "reason": "你收到这封邮件是因为你的账户密码已被重置。"
+  },
+  "authOtp": {
+    "ignore": "如果你没有提出此请求，请忽略这封邮件。",
+    "text": "你的 +54 验证码是：{{code}}",
+    "emailVerification": {
+      "subject": "验证你的邮箱 — +54",
+      "heading": "验证你的邮箱",
+      "sub": "在 +54 中输入此验证码以确认你的地址。",
+      "reason": "你收到这封邮件是因为你在 +54 创建了账户。"
+    },
+    "signIn": {
+      "subject": "你的登录验证码 — +54",
+      "heading": "你的登录验证码",
+      "sub": "在 +54 中输入此验证码以继续。",
+      "reason": "你收到这封邮件是因为有人尝试用此地址登录。"
+    },
+    "forgetPassword": {
+      "subject": "重置密码 — +54",
+      "heading": "重置密码",
+      "sub": "在 +54 中输入此验证码以设置新密码。",
+      "reason": "你收到这封邮件是因为有人申请重置密码。"
+    }
+  },
+  "authLink": {
+    "ignore": "如果你没有提出此请求，请忽略这封邮件。",
+    "copyUrl": "或将此地址复制到浏览器：",
+    "text": "打开此链接：\n{{url}}",
+    "emailVerification": {
+      "subject": "验证你的邮箱 — +54",
+      "heading": "验证你的邮箱",
+      "sub": "点击下方按钮以确认你的地址。",
+      "cta": "验证邮箱",
+      "reason": "你收到这封邮件是因为你在 +54 创建了账户。"
+    },
+    "signIn": {
+      "subject": "登录 +54",
+      "heading": "登录 +54",
+      "sub": "点击下方按钮以继续。",
+      "cta": "登录",
+      "reason": "你收到这封邮件是因为有人尝试用此地址登录。"
+    },
+    "forgetPassword": {
+      "subject": "重置密码 — +54",
+      "heading": "重置密码",
+      "sub": "点击下方按钮以设置新密码。",
+      "cta": "重置密码",
+      "reason": "你收到这封邮件是因为有人申请重置密码。"
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  }
+}

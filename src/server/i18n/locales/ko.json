@@ -1,0 +1,156 @@
+{
+  "axes": {
+    "consistency": "일관성",
+    "tactical_read": "전술 이해",
+    "control": "컨트롤",
+    "serve": "서브",
+    "endurance": "지구력",
+    "positioning": "포지셔닝"
+  },
+  "common": {
+    "unsubBefore": "원하시면 ",
+    "unsubLink": "수신 거부",
+    "unsubAfter": "하실 수 있습니다."
+  },
+  "evaluation": {
+    "subject": "새 평가가 등록되었습니다",
+    "kicker": "새 평가",
+    "heading": "새 평가가 등록되었습니다",
+    "sub": "최근 레슨에서의 성과를 확인하세요. 점수, 피드백, 진행 상황을 살펴보세요.",
+    "overallLabel": "종합 점수",
+    "coachKicker": "코치",
+    "lessonKicker": "레슨",
+    "strengthKicker": "최대 강점",
+    "cta": "평가 보기",
+    "reason": "프로필에 새 평가가 추가되어 이 이메일을 보내드립니다.",
+    "text": "새 평가가 등록되었습니다.\n\n종합: {{score}}/100\n코치: {{coach}}{{when}}{{strength}}\n\n+54에서 자세한 내용을 확인하세요.",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\n최대 강점: {{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "레슨이 확정되었습니다 — {{title}}",
+    "heading": "레슨이 확정되었습니다",
+    "sub": "레슨이 성공적으로 예약되었습니다.",
+    "personCoach": "코치",
+    "personStudent": "수강생",
+    "date": "날짜",
+    "time": "시간",
+    "cta": "예약 보기",
+    "reason": "+54에서 레슨을 예약하셔서 이 이메일을 보내드립니다.",
+    "text": "{{name}}님과의 레슨이 확정되었습니다.\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "{{name}}님과의 파델 레슨."
+  },
+  "lessonRequest": {
+    "subject": "새 레슨 요청 — {{name}}",
+    "heading": "새 레슨 요청",
+    "sub": "수강생이 레슨을 요청했습니다. 요청을 수락하거나 거절해 주세요.",
+    "date": "날짜",
+    "time": "시간",
+    "person": "수강생",
+    "cta": "요청 보기",
+    "reason": "수강생이 레슨을 요청하여 이 이메일을 보내드립니다.",
+    "text": "{{name}}님이 레슨을 요청했습니다.\n\n{{date}} · {{time}}\n\n+54에서 요청을 수락하거나 거절해 주세요."
+  },
+  "lessonDeclined": {
+    "subject": "레슨이 거절되었습니다 — {{date}}",
+    "heading": "레슨이 거절되었습니다",
+    "sub": "{{coach}} 님이 레슨 요청을 거절했습니다.",
+    "date": "날짜",
+    "time": "시간",
+    "person": "코치",
+    "motive": "사유",
+    "cta": "일정 보기",
+    "reason": "레슨 요청이 거절되어 이 이메일을 보내드립니다.",
+    "text": "{{coach}} 님이 레슨을 거절했습니다.\n\n{{date}} · {{time}}\n\n사유:\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "비밀번호 재설정 — +54",
+    "heading": "비밀번호 재설정",
+    "intro": "이 계정의 비밀번호 재설정 요청을 받았습니다.",
+    "openLink": "아래 링크를 여세요 (1시간 동안 유효):",
+    "cta": "비밀번호 재설정",
+    "copyUrl": "또는 이 주소를 브라우저에 복사하세요:",
+    "ignore": "요청하지 않으셨다면 이 이메일을 무시하세요."
+  },
+  "passwordChanged": {
+    "subject": "+54 계정 비밀번호가 재설정되었습니다.",
+    "heading": "+54 계정 비밀번호가 재설정되었습니다.",
+    "greeting": "{{name}} 님께,",
+    "greetingNoName": "안녕하세요,",
+    "intro": "+54 계정의 비밀번호가 성공적으로 재설정되었습니다.",
+    "ifYou": "본인이 변경한 경우 추가로 할 일은 없습니다.",
+    "ifNotYou": "이 변경을 알지 못한다면 즉시 비밀번호를 재설정하고 계정 보안 설정을 확인하세요.",
+    "cta": "비밀번호 재설정",
+    "help": "도움이 필요하면 +54 팀에 문의하세요.",
+    "signoffLead": "감사합니다.",
+    "signoff": "+54 팀",
+    "reason": "계정 비밀번호가 재설정되어 이 이메일을 보냅니다."
+  },
+  "authOtp": {
+    "ignore": "요청하지 않으셨다면 이 이메일을 무시하세요.",
+    "text": "+54 코드: {{code}}",
+    "emailVerification": {
+      "subject": "이메일 확인 — +54",
+      "heading": "이메일 확인",
+      "sub": "+54에 이 코드를 입력해 주소를 확인하세요.",
+      "reason": "+54에서 계정을 만들어 이 메일을 받았습니다."
+    },
+    "signIn": {
+      "subject": "로그인 코드 — +54",
+      "heading": "로그인 코드",
+      "sub": "계속하려면 +54에 이 코드를 입력하세요.",
+      "reason": "이 주소로 로그인을 시도해서 이 메일을 받았습니다."
+    },
+    "forgetPassword": {
+      "subject": "비밀번호 재설정 — +54",
+      "heading": "비밀번호 재설정",
+      "sub": "새 비밀번호를 정하려면 +54에 이 코드를 입력하세요.",
+      "reason": "비밀번호 재설정이 요청되어 이 메일을 받았습니다."
+    }
+  },
+  "authLink": {
+    "ignore": "요청하지 않으셨다면 이 이메일을 무시하세요.",
+    "copyUrl": "또는 이 주소를 브라우저에 복사하세요:",
+    "text": "이 링크를 여세요:\n{{url}}",
+    "emailVerification": {
+      "subject": "이메일 확인 — +54",
+      "heading": "이메일 확인",
+      "sub": "아래 버튼을 열어 주소를 확인하세요.",
+      "cta": "이메일 확인",
+      "reason": "+54에서 계정을 만들어 이 메일을 받았습니다."
+    },
+    "signIn": {
+      "subject": "+54 로그인",
+      "heading": "+54 로그인",
+      "sub": "아래 버튼을 열어 계속하세요.",
+      "cta": "로그인",
+      "reason": "이 주소로 로그인을 시도해서 이 메일을 받았습니다."
+    },
+    "forgetPassword": {
+      "subject": "비밀번호 재설정 — +54",
+      "heading": "비밀번호 재설정",
+      "sub": "아래 버튼을 열어 새 비밀번호를 정하세요.",
+      "cta": "비밀번호 재설정",
+      "reason": "비밀번호 재설정이 요청되어 이 메일을 받았습니다."
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  }
+}

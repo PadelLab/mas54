@@ -1,0 +1,156 @@
+{
+  "axes": {
+    "consistency": "安定性",
+    "tactical_read": "戦術理解",
+    "control": "コントロール",
+    "serve": "サーブ",
+    "endurance": "持久力",
+    "positioning": "ポジショニング"
+  },
+  "common": {
+    "unsubBefore": "ご希望の場合は、こちらから",
+    "unsubLink": "配信停止",
+    "unsubAfter": "できます。"
+  },
+  "evaluation": {
+    "subject": "新しい評価が公開されました",
+    "kicker": "新しい評価",
+    "heading": "新しい評価が公開されました",
+    "sub": "最新のレッスンでのパフォーマンスをご確認ください。スコア、フィードバック、進捗を確認できます。",
+    "overallLabel": "総合スコア",
+    "coachKicker": "コーチ",
+    "lessonKicker": "レッスン",
+    "strengthKicker": "最大の強み",
+    "cta": "評価を見る",
+    "reason": "プロフィールに新しい評価が追加されたため、このメールをお送りしています。",
+    "text": "新しい評価が公開されました。\n\n総合：{{score}}/100\nコーチ：{{coach}}{{when}}{{strength}}\n\n詳細は +54 でご確認ください。",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\n最大の強み：{{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "レッスン確定 — {{title}}",
+    "heading": "レッスン確定",
+    "sub": "レッスンの予約が完了しました。",
+    "personCoach": "コーチ",
+    "personStudent": "生徒",
+    "date": "日付",
+    "time": "時間",
+    "cta": "予約を見る",
+    "reason": "+54 でレッスンを予約されたため、このメールをお送りしています。",
+    "text": "{{name}} とのレッスンが確定しました。\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "{{name}} とのパデルレッスン。"
+  },
+  "lessonRequest": {
+    "subject": "新しいレッスンリクエスト — {{name}}",
+    "heading": "新しいレッスンリクエスト",
+    "sub": "生徒からレッスンのリクエストがありました。承認または辞退してください。",
+    "date": "日付",
+    "time": "時間",
+    "person": "生徒",
+    "cta": "リクエストを見る",
+    "reason": "生徒からレッスンのリクエストがあったため、このメールをお送りしています。",
+    "text": "{{name}} からレッスンのリクエストがありました。\n\n{{date}} · {{time}}\n\n+54 で承認または辞退してください。"
+  },
+  "lessonDeclined": {
+    "subject": "レッスンが辞退されました — {{date}}",
+    "heading": "レッスンが辞退されました",
+    "sub": "{{coach}} がレッスンのリクエストを辞退しました。",
+    "date": "日付",
+    "time": "時刻",
+    "person": "コーチ",
+    "motive": "理由",
+    "cta": "スケジュールを見る",
+    "reason": "レッスンのリクエストが辞退されたため、このメールをお送りしています。",
+    "text": "{{coach}} がレッスンを辞退しました。\n\n{{date}} · {{time}}\n\n理由:\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "パスワードのリセット — +54",
+    "heading": "パスワードをリセット",
+    "intro": "このアカウントのパスワードリセットのリクエストを受け付けました。",
+    "openLink": "以下のリンクを開いてください（1時間有効）：",
+    "cta": "パスワードをリセット",
+    "copyUrl": "または、このアドレスをブラウザにコピーしてください：",
+    "ignore": "このリクエストに心当たりがない場合は、このメールを無視してください。"
+  },
+  "passwordChanged": {
+    "subject": "+54アカウントのパスワードがリセットされました。",
+    "heading": "+54アカウントのパスワードがリセットされました。",
+    "greeting": "{{name}} 様",
+    "greetingNoName": "こんにちは",
+    "intro": "+54アカウントのパスワードが正常にリセットされました。",
+    "ifYou": "ご自身で変更した場合は、追加の操作は必要ありません。",
+    "ifNotYou": "この変更に心当たりがない場合は、すぐにパスワードをリセットし、アカウントのセキュリティ設定をご確認ください。",
+    "cta": "パスワードをリセット",
+    "help": "サポートが必要な場合は、+54チームまでご連絡ください。",
+    "signoffLead": "よろしくお願いいたします。",
+    "signoff": "+54チーム",
+    "reason": "このアカウントのパスワードがリセットされたため、このメールをお送りしています。"
+  },
+  "authOtp": {
+    "ignore": "このリクエストに心当たりがない場合は、このメールを無視してください。",
+    "text": "+54のコード：{{code}}",
+    "emailVerification": {
+      "subject": "メールアドレスの確認 — +54",
+      "heading": "メールアドレスの確認",
+      "sub": "+54にこのコードを入力して、アドレスを確認してください。",
+      "reason": "+54でアカウントを作成したため、このメールが届いています。"
+    },
+    "signIn": {
+      "subject": "ログインコード — +54",
+      "heading": "ログインコード",
+      "sub": "+54にこのコードを入力して続行してください。",
+      "reason": "このアドレスでログインが試行されたため、このメールが届いています。"
+    },
+    "forgetPassword": {
+      "subject": "パスワードのリセット — +54",
+      "heading": "パスワードをリセット",
+      "sub": "+54にこのコードを入力して、新しいパスワードを設定してください。",
+      "reason": "パスワードリセットがリクエストされたため、このメールが届いています。"
+    }
+  },
+  "authLink": {
+    "ignore": "このリクエストに心当たりがない場合は、このメールを無視してください。",
+    "copyUrl": "または、このアドレスをブラウザにコピーしてください：",
+    "text": "このリンクを開いてください：\n{{url}}",
+    "emailVerification": {
+      "subject": "メールアドレスの確認 — +54",
+      "heading": "メールアドレスの確認",
+      "sub": "下のボタンを開いてアドレスを確認してください。",
+      "cta": "メールを確認",
+      "reason": "+54でアカウントを作成したため、このメールが届いています。"
+    },
+    "signIn": {
+      "subject": "+54にログイン",
+      "heading": "+54にログイン",
+      "sub": "下のボタンを開いて続行してください。",
+      "cta": "ログイン",
+      "reason": "このアドレスでログインが試行されたため、このメールが届いています。"
+    },
+    "forgetPassword": {
+      "subject": "パスワードのリセット — +54",
+      "heading": "パスワードをリセット",
+      "sub": "下のボタンを開いて新しいパスワードを設定してください。",
+      "cta": "パスワードをリセット",
+      "reason": "パスワードリセットがリクエストされたため、このメールが届いています。"
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  }
+}

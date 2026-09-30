@@ -1,0 +1,156 @@
+{
+  "axes": {
+    "consistency": "Tutarlılık",
+    "tactical_read": "Taktik okuma",
+    "control": "Kontrol",
+    "serve": "Servis",
+    "endurance": "Dayanıklılık",
+    "positioning": "Pozisyonlama"
+  },
+  "common": {
+    "unsubBefore": "İsterseniz ",
+    "unsubLink": "abonelikten çıkın",
+    "unsubAfter": "."
+  },
+  "evaluation": {
+    "subject": "Yeni değerlendirme hazır",
+    "kicker": "YENİ DEĞERLENDİRME",
+    "heading": "Yeni değerlendirme hazır",
+    "sub": "Son dersinizdeki performansınıza bakın. Puanınızı, geri bildirimi ve ilerlemenizi inceleyin.",
+    "overallLabel": "Genel puan",
+    "coachKicker": "KOÇ",
+    "lessonKicker": "DERS",
+    "strengthKicker": "EN GÜÇLÜ YÖN",
+    "cta": "Değerlendirmeyi gör",
+    "reason": "Profilinize yeni bir değerlendirme eklendiği için bu e-postayı alıyorsunuz.",
+    "text": "Yeni değerlendirme hazır.\n\nGenel: {{score}}/100\nKoç: {{coach}}{{when}}{{strength}}\n\nAyrıntıları +54 içinde görün.",
+    "textWhen": "\n{{date}} {{time}}",
+    "textStrength": "\nEn güçlü yön: {{value}}"
+  },
+  "lessonConfirmed": {
+    "subject": "Ders onaylandı — {{title}}",
+    "heading": "Ders onaylandı",
+    "sub": "Dersiniz başarıyla planlandı.",
+    "personCoach": "Koç",
+    "personStudent": "Öğrenci",
+    "date": "Tarih",
+    "time": "Saat",
+    "cta": "Rezervasyonu gör",
+    "reason": "+54 ile bir ders rezervasyonu yaptığınız için bu e-postayı alıyorsunuz.",
+    "text": "{{name}} ile dersiniz onaylandı.\n\n{{date}} · {{time}}\n{{location}}",
+    "icsDescription": "{{name}} ile padel dersi."
+  },
+  "lessonRequest": {
+    "subject": "Yeni ders talebi — {{name}}",
+    "heading": "Yeni ders talebi",
+    "sub": "Bir öğrenci sizinle ders talep etti. Talebi onaylayın veya reddedin.",
+    "date": "Tarih",
+    "time": "Saat",
+    "person": "Öğrenci",
+    "cta": "Talebi gör",
+    "reason": "Bir öğrenci sizinle ders talep ettiği için bu e-postayı alıyorsunuz.",
+    "text": "{{name}} sizinle ders talep etti.\n\n{{date}} · {{time}}\n\nTalebi +54 içinde onaylayın veya reddedin."
+  },
+  "lessonDeclined": {
+    "subject": "Ders reddedildi — {{date}}",
+    "heading": "Ders reddedildi",
+    "sub": "{{coach}} ders talebinizi reddetti.",
+    "date": "Tarih",
+    "time": "Saat",
+    "person": "Koç",
+    "motive": "Gerekçe",
+    "cta": "Programı gör",
+    "reason": "Bu e-postayı bir ders talebi reddedildiği için alıyorsunuz.",
+    "text": "{{coach}} dersinizi reddetti.\n\n{{date}} · {{time}}\n\nGerekçe:\n{{motive}}"
+  },
+  "passwordReset": {
+    "subject": "Şifrenizi sıfırlayın — +54",
+    "heading": "Şifreyi sıfırla",
+    "intro": "Bu hesabın şifresini sıfırlamak için bir istek aldık.",
+    "openLink": "Aşağıdaki bağlantıyı açın (1 saat geçerlidir):",
+    "cta": "Şifreyi sıfırla",
+    "copyUrl": "Veya bu adresi tarayıcınıza kopyalayın:",
+    "ignore": "Bunu siz istemediyseniz bu e-postayı yok sayın."
+  },
+  "passwordChanged": {
+    "subject": "+54 hesabınızın şifresi sıfırlandı.",
+    "heading": "+54 hesabınızın şifresi sıfırlandı.",
+    "greeting": "Sayın {{name}},",
+    "greetingNoName": "Merhaba,",
+    "intro": "+54 hesabınızın şifresi başarıyla sıfırlandı.",
+    "ifYou": "Bu değişikliği siz yaptıysanız başka bir işlem yapmanıza gerek yoktur.",
+    "ifNotYou": "Bu değişikliği tanımıyorsanız şifrenizi hemen sıfırlayın ve hesabınızın güvenlik ayarlarını gözden geçirin:",
+    "cta": "Şifremi sıfırla",
+    "help": "Yardıma ihtiyacınız olursa +54 ekibiyle iletişime geçin.",
+    "signoffLead": "Saygılarımızla,",
+    "signoff": "+54 Ekibi",
+    "reason": "Hesabınızın şifresi sıfırlandığı için bu e-postayı alıyorsunuz."
+  },
+  "authOtp": {
+    "ignore": "Bunu siz istemediyseniz bu e-postayı yok sayın.",
+    "text": "+54 kodunuz: {{code}}",
+    "emailVerification": {
+      "subject": "E-postanı doğrula — +54",
+      "heading": "E-postanı doğrula",
+      "sub": "Adresini onaylamak için bu kodu +54 uygulamasına gir.",
+      "reason": "Bu e-postayı +54 hesabı oluşturduğun için alıyorsun."
+    },
+    "signIn": {
+      "subject": "Giriş kodun — +54",
+      "heading": "Giriş kodun",
+      "sub": "Devam etmek için bu kodu +54 uygulamasına gir.",
+      "reason": "Bu e-postayı bu adresle giriş denendiği için alıyorsun."
+    },
+    "forgetPassword": {
+      "subject": "Şifrenizi sıfırlayın — +54",
+      "heading": "Şifreyi sıfırla",
+      "sub": "Yeni bir şifre seçmek için bu kodu +54 uygulamasına gir.",
+      "reason": "Bu e-postayı şifre sıfırlama istendiği için alıyorsun."
+    }
+  },
+  "authLink": {
+    "ignore": "Bunu siz istemediyseniz bu e-postayı yok sayın.",
+    "copyUrl": "Veya bu adresi tarayıcınıza kopyalayın:",
+    "text": "Bu bağlantıyı aç:\n{{url}}",
+    "emailVerification": {
+      "subject": "E-postanı doğrula — +54",
+      "heading": "E-postanı doğrula",
+      "sub": "Adresini onaylamak için aşağıdaki düğmeyi aç.",
+      "cta": "E-postayı doğrula",
+      "reason": "Bu e-postayı +54 hesabı oluşturduğun için alıyorsun."
+    },
+    "signIn": {
+      "subject": "+54’e giriş",
+      "heading": "+54’e giriş",
+      "sub": "Devam etmek için aşağıdaki düğmeyi aç.",
+      "cta": "Giriş yap",
+      "reason": "Bu e-postayı bu adresle giriş denendiği için alıyorsun."
+    },
+    "forgetPassword": {
+      "subject": "Şifrenizi sıfırlayın — +54",
+      "heading": "Şifreyi sıfırla",
+      "sub": "Yeni bir şifre seçmek için aşağıdaki düğmeyi aç.",
+      "cta": "Şifreyi sıfırla",
+      "reason": "Bu e-postayı şifre sıfırlama istendiği için alıyorsun."
+    }
+  },
+  "staffCredentials": {
+    "subject": "Your login details — +54",
+    "heading": "Your login details",
+    "greeting": "Hi {{name}},",
+    "greetingNoName": "Hi,",
+    "intro": "Please find your login details below.",
+    "emailLabel": "E-mail",
+    "passwordLabel": "Temporary password",
+    "mustChange": "For security, please change your password when you sign in for the first time.",
+    "openLink": "Sign in here:",
+    "cta": "Sign in",
+    "reason": "This is an automated notification from +54. Please do not reply to this email."
+  },
+  "accountDeleted": {
+    "subject": "Your account has been deleted — +54",
+    "heading": "Thank you for your time with us",
+    "body": "We're writing to confirm that your account has been deleted. Thank you for having spent time with us — we genuinely appreciate that you gave +54 a try.",
+    "reason": "You received this email because your +54 account was deleted."
+  }
+}
