@@ -12,6 +12,7 @@ import {
   validateAppPassword,
 } from "@/lib/password-policy";
 import { markCalendarSubscribeForNextPage } from "@/lib/calendar-subscribe-client";
+import { storeEmailVerificationOtp } from "@/lib/email-verification-otp";
 import { isValidAppEmail, translateEmailApiMessage } from "@/lib/email-format";
 import { useAuth } from "@/contexts/auth-context";
 import { Button } from "@/components/ui/button";
@@ -125,6 +126,7 @@ export default function RegisterStudentPage() {
     }
     const emailNorm = email.trim().toLowerCase();
     if (res.needsEmailVerification) {
+      if (res.verificationCode) storeEmailVerificationOtp(emailNorm, res.verificationCode);
       router.replace(`/register/verify?email=${encodeURIComponent(emailNorm)}`);
       return;
     }

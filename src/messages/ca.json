@@ -862,6 +862,7 @@
     "resetBackHome": "Inici",
     "verifyTitle": "Verifica el teu correu",
     "verifyIntro": "Hem enviat un codi de 6 dígits a {email}. Introdueix-lo per activar el compte.",
+    "verifyOnScreen": "El teu codi",
     "verifyCodeLabel": "Codi de verificació",
     "verifySubmit": "Verificar",
     "verifyResend": "Reenviar el codi",

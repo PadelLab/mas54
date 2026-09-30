@@ -862,6 +862,7 @@
     "resetBackHome": "Home",
     "verifyTitle": "Verifica la tua e-mail",
     "verifyIntro": "Abbiamo inviato un codice a 6 cifre a {email}. Inseriscilo per attivare l'account.",
+    "verifyOnScreen": "Il tuo codice",
     "verifyCodeLabel": "Codice di verifica",
     "verifySubmit": "Verifica",
     "verifyResend": "Invia di nuovo il codice",

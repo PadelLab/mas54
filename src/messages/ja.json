@@ -862,6 +862,7 @@
     "resetBackHome": "ホーム",
     "verifyTitle": "メールを確認",
     "verifyIntro": "{email} に6桁のコードを送信しました。アカウントを有効にするには入力してください。",
+    "verifyOnScreen": "Your code",
     "verifyCodeLabel": "確認コード",
     "verifySubmit": "確認する",
     "verifyResend": "コードを再送信",

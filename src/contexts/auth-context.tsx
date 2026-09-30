@@ -141,7 +141,9 @@ type AuthContextValue = {
     email: string,
     otp: string
   ) => Promise<{ ok: boolean; message?: string; role?: UserRole; mustChangePassword?: boolean }>;
-  resendEmailVerification: (email: string) => Promise<{ ok: boolean; message?: string }>;
+  resendEmailVerification: (
+    email: string,
+  ) => Promise<{ ok: boolean; message?: string; verificationCode?: string }>;
   logout: () => Promise<void>;
   registerStudent: (data: {
     name: string;
@@ -150,7 +152,7 @@ type AuthContextValue = {
     nationality: string;
     birthDate: string;
     gender: UserGender;
-  }) => Promise<{ ok: boolean; message?: string; needsEmailVerification?: boolean }>;
+  }) => Promise<{ ok: boolean; message?: string; needsEmailVerification?: boolean; verificationCode?: string }>;
   registerProfessor: (data: {
     name: string;
     email: string;
@@ -498,14 +500,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [pullState]);
 
   const resendEmailVerification = useCallback(async (email: string) => {
-    const { res, data } = await apiPostJson<{ ok?: boolean; message?: string }>(
-      "/api/auth/resend-email-code",
-      { email },
-    );
+    const { res, data } = await apiPostJson<{
+      ok?: boolean;
+      message?: string;
+      verificationCode?: string;
+    }>("/api/auth/resend-email-code", { email });
     if (!res.ok || data.ok === false) {
       return { ok: false as const, message: data.message ?? "Não foi possível reenviar o código." };
     }
-    return { ok: true as const };
+    return { ok: true as const, verificationCode: data.verificationCode };
   }, []);
 
   const logout = useCallback(async () => {
@@ -535,6 +538,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         ok?: boolean;
         message?: string;
         needsEmailVerification?: boolean;
+        verificationCode?: string;
       }>("/api/padellab", {
         action: "register_student",
         name: data.name,
@@ -548,7 +552,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { ok: false as const, message: j.message ?? "Erro no cadastro." };
       }
       if (j.needsEmailVerification) {
-        return { ok: true as const, needsEmailVerification: true };
+        return {
+          ok: true as const,
+          needsEmailVerification: true,
+          verificationCode: j.verificationCode,
+        };
       }
       let pulled = await pullState();
       if (!pulled.user) {

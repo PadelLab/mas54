@@ -1,6 +1,7 @@
 import "server-only";
 
 import { EMAIL_API_MESSAGE } from "@/lib/email-format";
+import { normalizeDatabaseUrl } from "./neon-client";
 
 type NeonResult = { error?: { message?: string } | null; data?: unknown };
 
@@ -453,5 +454,40 @@ export async function signOutNeonAuth() {
     if (process.env.NODE_ENV === "development") {
       console.warn("[neon-auth] sign-out failed", err);
     }
+  }
+}
+
+function resolveNeonAuthDatabaseUrl(): string | null {
+  const explicit = process.env.NEON_AUTH_DATABASE_URL?.trim();
+  if (explicit) return normalizeDatabaseUrl(explicit);
+  const club = process.env.DATABASE_URL?.trim();
+  if (!club) return null;
+  try {
+    const u = new URL(normalizeDatabaseUrl(club));
+    const current = decodeURIComponent(u.pathname.replace(/^\//, "")).split("/")[0] ?? "";
+    if (current.toLowerCase() === "neondb") return u.toString();
+    u.pathname = "/neondb";
+    return u.toString();
+  } catch {
+    return null;
+  }
+}
+
+/** Mark the Neon Auth mailbox as verified so login does not depend on Neon OTP email. */
+export async function markNeonAuthEmailVerified(email: string): Promise<void> {
+  const mailbox = email.trim().toLowerCase();
+  if (!mailbox.includes("@")) return;
+  const url = resolveNeonAuthDatabaseUrl();
+  if (!url) return;
+  try {
+    const { neon } = await import("@neondatabase/serverless");
+    const authSql = neon(url);
+    await authSql`
+      UPDATE neon_auth."user"
+      SET "emailVerified" = true, "updatedAt" = NOW()
+      WHERE lower(email) = ${mailbox}
+    `;
+  } catch (err) {
+    console.warn("[neon-auth] failed to mark email verified", err);
   }
 }
