@@ -1,6 +1,7 @@
 import "server-only";
 
 import { EMAIL_API_MESSAGE } from "@/lib/email-format";
+import { normalizeDatabaseUrl } from "./neon-client";
 
 type NeonResult = { error?: { message?: string } | null; data?: unknown };
 
@@ -453,5 +454,80 @@ export async function signOutNeonAuth() {
     if (process.env.NODE_ENV === "development") {
       console.warn("[neon-auth] sign-out failed", err);
     }
+  }
+}
+
+function resolveNeonAuthDatabaseUrl(): string | null {
+  const explicit = process.env.NEON_AUTH_DATABASE_URL?.trim();
+  if (explicit) return normalizeDatabaseUrl(explicit);
+  const club = process.env.DATABASE_URL?.trim();
+  if (!club) return null;
+  try {
+    const u = new URL(normalizeDatabaseUrl(club));
+    const current = decodeURIComponent(u.pathname.replace(/^\//, "")).split("/")[0] ?? "";
+    if (current.toLowerCase() === "neondb") return u.toString();
+    u.pathname = "/neondb";
+    return u.toString();
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Remove the Neon Auth identity (`neondb.neon_auth.user` + role). Club DELETE
+ * only touches `public.users` on +54, so login identities otherwise stay behind.
+ */
+export async function deleteNeonAuthIdentity(input: {
+  neonAuthUserId?: string | null;
+  email?: string | null;
+}): Promise<void> {
+  const userId = input.neonAuthUserId?.trim() ?? "";
+  const email = input.email?.trim().toLowerCase() ?? "";
+  if (!userId && !email) return;
+
+  try {
+    const { auth } = await import("@/lib/auth/server");
+    const admin = (
+      auth as {
+        admin?: { removeUser?: (args: { userId: string }) => Promise<NeonResult> };
+      }
+    ).admin;
+    if (userId && admin?.removeUser) {
+      const result = await admin.removeUser({ userId });
+      if (!result?.error) return;
+    }
+  } catch {
+    /* SQL fallback below */
+  }
+
+  if (userId) {
+    const viaApi = await neonAuthFetch("admin/remove-user", { userId });
+    if (viaApi.ok) return;
+  }
+
+  const url = resolveNeonAuthDatabaseUrl();
+  if (!url) return;
+
+  try {
+    const { neon } = await import("@neondatabase/serverless");
+    const authSql = neon(url);
+    if (userId) {
+      await authSql`DELETE FROM neon_auth.invitation WHERE "inviterId" = ${userId}`;
+      await authSql`DELETE FROM neon_auth.member WHERE "userId" = ${userId}`;
+      await authSql`DELETE FROM neon_auth.session WHERE "userId" = ${userId}`;
+      await authSql`DELETE FROM neon_auth.account WHERE "userId" = ${userId}`;
+    }
+    if (email) {
+      await authSql`DELETE FROM neon_auth.invitation WHERE lower(email) = ${email}`;
+      await authSql`DELETE FROM neon_auth.verification WHERE lower(identifier) = ${email}`;
+    }
+    if (userId) {
+      await authSql`DELETE FROM neon_auth."user" WHERE id = ${userId}`;
+    }
+    if (email) {
+      await authSql`DELETE FROM neon_auth."user" WHERE lower(email) = ${email}`;
+    }
+  } catch (err) {
+    console.warn("[neon-auth] failed to delete identity", err);
   }
 }
