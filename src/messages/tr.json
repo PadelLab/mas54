@@ -862,7 +862,6 @@
     "resetBackHome": "Ana sayfa",
     "verifyTitle": "E-postanı doğrula",
     "verifyIntro": "{email} adresine 6 haneli bir kod gönderdik. Hesabı etkinleştirmek için gir.",
-    "verifyOnScreen": "Your code",
     "verifyCodeLabel": "Doğrulama kodu",
     "verifySubmit": "Doğrula",
     "verifyResend": "Kodu yeniden gönder",

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSql } from "@/server/padellab/neon-client";
 import { bootstrapDatabase } from "@/server/padellab/seed-data";
-import { issueEmailVerificationCode } from "@/server/padellab/email-verification";
+import { resendNeonAuthVerification } from "@/server/padellab/neon-auth-sync";
 import { lookupUserForLogin } from "@/server/padellab/club-user-lookup";
 import { rejectUntrustedOrigin } from "@/server/padellab/request-guard";
 
@@ -35,8 +35,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true });
     }
 
-    const verificationCode = await issueEmailVerificationCode({ email });
-    return NextResponse.json({ ok: true, verificationCode });
+    const neon = await resendNeonAuthVerification(email);
+    if (!neon.ok) {
+      return NextResponse.json({ ok: false, message: neon.message }, { status: 503 });
+    }
+    return NextResponse.json({ ok: true });
   } catch (e) {
     console.error("[resend-email-code]", e);
     return NextResponse.json({ ok: false, message: "SERVER" }, { status: 500 });

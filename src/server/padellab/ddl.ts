@@ -557,13 +557,6 @@ export async function runMigrations(sql: Sql) {
     )
   `;
   await sql`
-    CREATE TABLE IF NOT EXISTS email_verification_codes (
-      email TEXT PRIMARY KEY,
-      code_hash TEXT NOT NULL,
-      expires_at TIMESTAMPTZ NOT NULL
-    )
-  `;
-  await sql`
     DO $padel_english_identifiers$
     BEGIN
       IF EXISTS (

@@ -862,7 +862,6 @@
     "resetBackHome": "Hem",
     "verifyTitle": "Verifiera din e-post",
     "verifyIntro": "Vi skickade en 6-siffrig kod till {email}. Ange den för att aktivera kontot.",
-    "verifyOnScreen": "Your code",
     "verifyCodeLabel": "Verifieringskod",
     "verifySubmit": "Verifiera",
     "verifyResend": "Skicka koden igen",

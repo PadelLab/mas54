@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 
 import { BrandLogo } from "@/components/brand-logo";
 import { useAuth } from "@/contexts/auth-context";
@@ -12,11 +12,6 @@ import {
   markCalendarSubscribeForNextPage,
 } from "@/lib/calendar-subscribe-client";
 import { homePathForUserRole } from "@/lib/role-utils";
-import {
-  clearEmailVerificationOtp,
-  readEmailVerificationOtp,
-  storeEmailVerificationOtp,
-} from "@/lib/email-verification-otp";
 import { Button } from "@/components/ui/button";
 import { AUTH_CONTROL_CLASS, AUTH_FIELD_LABEL_CLASS, Input, Label } from "@/components/ui/input";
 import { Card, CardTitle } from "@/components/ui/card";
@@ -37,21 +32,12 @@ function VerifyEmailForm() {
   const email = (searchParams.get("email") ?? "").trim().toLowerCase();
   const { completeEmailVerification, resendEmailVerification } = useAuth();
   const [code, setCode] = useState("");
-  const [shownCode, setShownCode] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [resendBusy, setResendBusy] = useState(false);
 
   const digits = useMemo(() => code.replace(/\D/g, "").slice(0, 6), [code]);
-
-  useEffect(() => {
-    if (!email) return;
-    const stored = readEmailVerificationOtp(email);
-    if (!stored) return;
-    setShownCode(stored);
-    setCode(stored);
-  }, [email]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,7 +57,6 @@ function VerifyEmailForm() {
         );
         return;
       }
-      clearEmailVerificationOtp();
       const r = res.role;
       if (
         (r === "student" || r === "coach" || r === "coach_admin") &&
@@ -95,11 +80,6 @@ function VerifyEmailForm() {
       if (!res.ok) {
         setError(res.message ?? t("verifyError"));
         return;
-      }
-      if (res.verificationCode) {
-        storeEmailVerificationOtp(email, res.verificationCode);
-        setShownCode(res.verificationCode);
-        setCode(res.verificationCode);
       }
       setInfo(t("verifyResent"));
     } finally {
@@ -130,16 +110,6 @@ function VerifyEmailForm() {
 
         {email ? (
           <form onSubmit={onSubmit} className="space-y-4">
-            {shownCode ? (
-              <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-5 text-center dark:border-zinc-700 dark:bg-zinc-800/60">
-                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                  {t("verifyOnScreen")}
-                </p>
-                <p className="font-mono text-3xl font-bold tracking-[0.35em] text-zinc-900 dark:text-white">
-                  {shownCode}
-                </p>
-              </div>
-            ) : null}
             <div>
               <Label htmlFor="verify-code" className={AUTH_FIELD_LABEL_CLASS}>
                 {t("verifyCodeLabel")}

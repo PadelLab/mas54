@@ -47,8 +47,7 @@ import { sendStudentWelcomeEmail } from "./student-welcome-mail";
 import { sendPasswordChangedEmail } from "./password-changed-mail";
 import { sendStaffCredentialsEmail } from "./staff-credentials-mail";
 import { formatSessionCookieValue, isSessionCookieValid, parseSessionCookieValue } from "./session-cookie";
-import { changeNeonAuthPassword, createNeonAuthUser, markNeonAuthEmailVerified } from "./neon-auth-sync";
-import { issueEmailVerificationCode } from "./email-verification";
+import { changeNeonAuthPassword, createNeonAuthUser } from "./neon-auth-sync";
 import { userEmailTaken, userEmailTakenExcept } from "./club-user-lookup";
 import { isTempAlphanumericPassword } from "@/lib/temp-password";
 import { generateTempPassword, hashPassword } from "./password";
@@ -100,8 +99,6 @@ export type MutationResult = {
   clearSessionCookie?: boolean;
   /** Signup finished; the email confirmation code still needs to be confirmed. */
   needsEmailVerification?: boolean;
-  /** Plain 6-digit code to show on the verify screen (this response only). */
-  verificationCode?: string;
   /** Staff account created; if false, the temporary-password email was not sent. */
   emailSent?: boolean;
   /** Temporary password generated on this create (this moment only; not stored in clear text). */
@@ -248,7 +245,7 @@ export async function handlePadellabMutation(
     if (!demo.ok) return demo;
     const dup = await userEmailTaken(sql, email);
     if (dup) return emailTakenMessage();
-    const neon = await createNeonAuthUser({ email, password, name, skipVerificationEmail: true });
+    const neon = await createNeonAuthUser({ email, password, name });
     if (!neon.ok) return { ok: false, message: neon.message };
     const id = `u-${randomUUID()}`;
     const createdAt = new Date().toISOString();
@@ -287,9 +284,7 @@ export async function handlePadellabMutation(
         locale: accountLocale,
       }),
     );
-    await markNeonAuthEmailVerified(email);
-    const verificationCode = await issueEmailVerificationCode({ email, locale: accountLocale });
-    return { ok: true, needsEmailVerification: true, verificationCode };
+    return { ok: true, needsEmailVerification: true };
   }
 
   if (action === "register_professor" || action === "register_coach") {
@@ -705,7 +700,7 @@ export async function handlePadellabMutation(
     const password = isTempAlphanumericPassword(proposed) ? proposed : generateTempPassword(8);
     const dup = await userEmailTaken(sql, email);
     if (dup) return emailTakenMessage();
-    const neon = await createNeonAuthUser({ email, password, name, skipVerificationEmail: true });
+    const neon = await createNeonAuthUser({ email, password, name });
     if (!neon.ok) return { ok: false, message: neon.message };
     const id = `u-${randomUUID()}`;
     const createdAt = new Date().toISOString();

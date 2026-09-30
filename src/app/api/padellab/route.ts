@@ -83,7 +83,6 @@ export async function POST(req: NextRequest) {
       message: result.message,
       id: result.id,
       needsEmailVerification: result.needsEmailVerification,
-      verificationCode: result.verificationCode,
       emailSent: result.emailSent,
       tempPassword: result.tempPassword,
       ...(sessionToken ? { sessionToken } : {}),

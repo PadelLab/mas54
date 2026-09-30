@@ -862,7 +862,6 @@
     "resetBackHome": "홈",
     "verifyTitle": "이메일 확인",
     "verifyIntro": "{email}으로 6자리 코드를 보냈습니다. 계정을 활성화하려면 입력하세요.",
-    "verifyOnScreen": "Your code",
     "verifyCodeLabel": "인증 코드",
     "verifySubmit": "확인",
     "verifyResend": "코드 다시 보내기",

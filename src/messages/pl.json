@@ -862,7 +862,6 @@
     "resetBackHome": "Strona główna",
     "verifyTitle": "Potwierdź e-mail",
     "verifyIntro": "Wysłaliśmy 6-cyfrowy kod na {email}. Wpisz go, aby aktywować konto.",
-    "verifyOnScreen": "Your code",
     "verifyCodeLabel": "Kod weryfikacyjny",
     "verifySubmit": "Potwierdź",
     "verifyResend": "Wyślij kod ponownie",

@@ -8,8 +8,7 @@ import {
   formatSessionCookieValue,
   sessionCookieOptions,
 } from "@/server/padellab/session-cookie";
-import { consumeEmailVerificationCode } from "@/server/padellab/email-verification";
-import { markNeonAuthEmailVerified, verifyNeonAuthEmailOtp } from "@/server/padellab/neon-auth-sync";
+import { verifyNeonAuthEmailOtp } from "@/server/padellab/neon-auth-sync";
 import { publicApiErrorMessage, rejectIfRateLimited, rejectUntrustedOrigin } from "@/server/padellab/request-guard";
 
 export const runtime = "nodejs";
@@ -35,14 +34,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, message: "INVALID_CODE" });
     }
 
-    const clubOk = await consumeEmailVerificationCode(email, otp);
-    if (!clubOk) {
-      const neon = await verifyNeonAuthEmailOtp({ email: u.email, otp });
-      if (!neon.ok) {
-        return NextResponse.json({ ok: false, message: neon.message });
-      }
+    const neon = await verifyNeonAuthEmailOtp({ email: u.email, otp });
+    if (!neon.ok) {
+      return NextResponse.json({ ok: false, message: neon.message });
     }
-    await markNeonAuthEmailVerified(u.email);
 
     const blocked = clubLoginBlockedMessage(u);
     if (blocked) {

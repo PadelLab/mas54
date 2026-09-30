@@ -862,7 +862,6 @@
     "resetBackHome": "Главная",
     "verifyTitle": "Подтвердите эл. почту",
     "verifyIntro": "Мы отправили 6-значный код на {email}. Введите его, чтобы активировать аккаунт.",
-    "verifyOnScreen": "Your code",
     "verifyCodeLabel": "Код подтверждения",
     "verifySubmit": "Подтвердить",
     "verifyResend": "Отправить код ещё раз",

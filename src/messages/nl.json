@@ -862,7 +862,6 @@
     "resetBackHome": "Home",
     "verifyTitle": "Bevestig je e-mail",
     "verifyIntro": "We hebben een 6-cijferige code naar {email} gestuurd. Voer die in om je account te activeren.",
-    "verifyOnScreen": "Your code",
     "verifyCodeLabel": "Verificatiecode",
     "verifySubmit": "Bevestigen",
     "verifyResend": "Code opnieuw versturen",

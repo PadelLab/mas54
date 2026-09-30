@@ -862,7 +862,6 @@
     "resetBackHome": "首页",
     "verifyTitle": "验证你的邮箱",
     "verifyIntro": "我们已向 {email} 发送了 6 位验证码。请输入以激活账户。",
-    "verifyOnScreen": "Your code",
     "verifyCodeLabel": "验证码",
     "verifySubmit": "验证",
     "verifyResend": "重新发送验证码",
