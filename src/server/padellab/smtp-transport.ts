@@ -1,6 +1,7 @@
 import "server-only";
 import nodemailer from "nodemailer";
-import type { SendMailOptions, SentMessageInfo, Transporter } from "nodemailer";
+import type { SendMailOptions, SentMessageInfo } from "nodemailer";
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
 function env(name: string): string {
   let v = process.env[name]?.trim() ?? "";
@@ -46,8 +47,8 @@ export function isSmtpConfigured(): boolean {
 const TRANSIENT_SMTP =
   /connection closed|econnreset|econnrefused|etimedout|socket hang up|unexpectedly|greeting never received|connection ended|broken pipe/i;
 
-function createTransporter(cfg: SmtpConfig): Transporter {
-  return nodemailer.createTransport({
+function createTransporter(cfg: SmtpConfig) {
+  const options: SMTPTransport.Options = {
     host: cfg.host,
     port: cfg.port,
     secure: cfg.secure,
@@ -57,8 +58,8 @@ function createTransporter(cfg: SmtpConfig): Transporter {
     connectionTimeout: 15_000,
     greetingTimeout: 15_000,
     socketTimeout: 25_000,
-    pool: false,
-  });
+  };
+  return nodemailer.createTransport(options);
 }
 
 function sleep(ms: number) {
