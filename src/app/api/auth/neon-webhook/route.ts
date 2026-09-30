@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { after, NextRequest, NextResponse } from "next/server";
 import {
   authMailKindFromNeon,
   localeForMailbox,
@@ -32,39 +32,49 @@ export async function POST(req: NextRequest) {
     if (!email.includes("@")) {
       return NextResponse.json({ ok: false, error: "missing_email" }, { status: 400 });
     }
-    const kind = authMailKindFromNeon(
-      eventType === "send.otp" ? payload.event_data?.otp_type : payload.event_data?.link_type,
-    );
-    const { shouldSuppressAuthMail } = await import("@/server/padellab/skip-auth-mail");
-    if (await shouldSuppressAuthMail(email, kind)) {
-      return NextResponse.json({ ok: true, skipped: true });
-    }
-    const locale = await localeForMailbox(email);
 
     if (eventType === "send.otp") {
       const code = payload.event_data?.otp_code?.trim() ?? "";
       if (!code) return NextResponse.json({ ok: false, error: "missing_otp" }, { status: 400 });
-      const sent = await sendAuthOtpEmail({
-        to: email,
-        code,
-        kind: authMailKindFromNeon(payload.event_data?.otp_type),
-        locale,
-      });
-      if (!sent) return NextResponse.json({ ok: false, error: "send_failed" }, { status: 503 });
+      const kind = authMailKindFromNeon(payload.event_data?.otp_type);
+      after(() =>
+        void deliverAuthMail({
+          email,
+          kind,
+          send: async (locale) => sendAuthOtpEmail({ to: email, code, kind, locale }),
+        }),
+      );
       return NextResponse.json({ ok: true });
     }
 
     const url = payload.event_data?.link_url?.trim() ?? "";
     if (!url) return NextResponse.json({ ok: false, error: "missing_link" }, { status: 400 });
-    const sent = await sendAuthMagicLinkEmail({
-      to: email,
-      url,
-      kind: authMailKindFromNeon(payload.event_data?.link_type),
-      locale,
-    });
-    if (!sent) return NextResponse.json({ ok: false, error: "send_failed" }, { status: 503 });
+    const kind = authMailKindFromNeon(payload.event_data?.link_type);
+    after(() =>
+      void deliverAuthMail({
+        email,
+        kind,
+        send: async (locale) => sendAuthMagicLinkEmail({ to: email, url, kind, locale }),
+      }),
+    );
     return NextResponse.json({ ok: true });
   }
 
   return NextResponse.json({ ok: true });
+}
+
+async function deliverAuthMail(input: {
+  email: string;
+  kind: ReturnType<typeof authMailKindFromNeon>;
+  send: (locale: string | null) => Promise<boolean>;
+}) {
+  try {
+    const { shouldSuppressAuthMail } = await import("@/server/padellab/skip-auth-mail");
+    if (await shouldSuppressAuthMail(input.email, input.kind)) return;
+    const locale = await localeForMailbox(input.email);
+    const sent = await input.send(locale);
+    if (!sent) console.warn("[neon-auth-webhook] branded mail was not sent", input.kind);
+  } catch (err) {
+    console.error("[neon-auth-webhook] branded mail failed", err);
+  }
 }
