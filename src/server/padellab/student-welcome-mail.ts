@@ -18,6 +18,8 @@ export async function sendStudentWelcomeEmail(input: {
   const transporter = getSmtpTransporter();
   const from = smtpFrom();
   if (!transporter || !from) return;
+  // Signup also sends the OTP from another function; give Gmail a moment first.
+  await new Promise((resolve) => setTimeout(resolve, 1200));
 
   const t = mailT(input.locale);
   const lang = mailHtmlLang(input.locale);
