@@ -3,7 +3,7 @@ import type { TFunction } from "i18next";
 import { NOTIFICATIONS_SETTINGS_PATH } from "@/lib/safe-next-path";
 import { formatDaySectionTitle, formatHm12 } from "@/lib/schedule-date";
 import { mailHtmlLang, mailIntlLocale, mailT } from "@/server/i18n/mail-i18n";
-import { brandedLessonMailAttachments, mailBrandLogoHtml, mailDetailRow, mailFooterSocialHtml } from "./branded-mail";
+import { brandedLessonMailAttachments, mailDetailRow, mailFooterSocialHtml } from "./branded-mail";
 import { getPublicAppUrl } from "./public-app-url";
 import { getSmtpTransporter, isSmtpConfigured, smtpFrom } from "./smtp-transport";
 
@@ -100,7 +100,7 @@ function buildLessonRequestHtml(input: {
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border-radius:16px;">
           <tr>
             <td align="center" style="padding:36px 28px 32px;">
-              ${mailBrandLogoHtml()}
+              <img src="cid:plus54-logo" width="168" alt="+54" style="display:block;border:0;outline:none;margin:0 auto 22px;height:auto;max-width:168px;" />
               <div style="font-size:26px;line-height:1.25;font-weight:700;color:#111827;padding-bottom:8px;">${heading}</div>
               <div style="font-size:15px;line-height:1.5;color:#6b7280;padding-bottom:22px;">${sub}</div>
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;">
