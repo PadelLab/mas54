@@ -4,7 +4,7 @@ import { mailHtmlLang, mailIntlLocale, mailT } from "@/server/i18n/mail-i18n";
 import { NOTIFICATIONS_SETTINGS_PATH } from "@/lib/safe-next-path";
 import { formatDaySectionTitle, formatHm12 } from "@/lib/schedule-date";
 import { SKILL_AXIS_KEYS, type SkillAxisKey } from "@/lib/types";
-import { brandedLogoAttachments, mailFooterSocialHtml } from "./branded-mail";
+import { brandedLogoAttachments, mailBrandLogoHtml, mailFooterSocialHtml } from "./branded-mail";
 import { getPublicAppUrl } from "./public-app-url";
 import { getSmtpTransporter, isSmtpConfigured, smtpFrom } from "./smtp-transport";
 
@@ -173,7 +173,7 @@ function buildEvaluationAlertHtml(input: {
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#ffffff;border-radius:16px;">
           <tr>
             <td align="center" style="padding:36px 28px 8px;">
-              <img src="cid:plus54-logo" width="168" alt="+54" style="display:block;border:0;outline:none;margin:0 auto 18px;height:auto;max-width:168px;" />
+              ${mailBrandLogoHtml(18)}
               <div style="font-size:11px;letter-spacing:0.16em;font-weight:700;color:${GREEN};">${kicker}</div>
               <div style="width:28px;height:2px;background:${GREEN};margin:10px auto 14px;line-height:2px;font-size:2px;">&nbsp;</div>
               <div style="font-size:26px;line-height:1.25;font-weight:700;color:${NAVY};padding-bottom:10px;">${heading}</div>

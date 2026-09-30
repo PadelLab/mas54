@@ -1,6 +1,7 @@
 import "server-only";
 import nodemailer from "nodemailer";
-import type { Transporter } from "nodemailer";
+import type { SendMailOptions, SentMessageInfo } from "nodemailer";
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
 function env(name: string): string {
   let v = process.env[name]?.trim() ?? "";
@@ -43,15 +44,11 @@ export function isSmtpConfigured(): boolean {
   return readSmtpConfig() != null;
 }
 
-let cached: Transporter | null = null;
-let cachedKey = "";
+const TRANSIENT_SMTP =
+  /connection closed|econnreset|econnrefused|etimedout|socket hang up|unexpectedly|greeting never received|connection ended|broken pipe/i;
 
-export function getSmtpTransporter(): Transporter | null {
-  const cfg = readSmtpConfig();
-  if (!cfg) return null;
-  const key = `${cfg.host}|${cfg.port}|${cfg.secure}|${cfg.user}`;
-  if (cached && cachedKey === key) return cached;
-  cached = nodemailer.createTransport({
+function createTransporter(cfg: SmtpConfig) {
+  const options: SMTPTransport.Options = {
     host: cfg.host,
     port: cfg.port,
     secure: cfg.secure,
@@ -60,8 +57,59 @@ export function getSmtpTransporter(): Transporter | null {
     tls: { minVersion: "TLSv1.2" },
     connectionTimeout: 15_000,
     greetingTimeout: 15_000,
-    socketTimeout: 20_000,
-  });
-  cachedKey = key;
-  return cached;
+    socketTimeout: 25_000,
+  };
+  return nodemailer.createTransport(options);
+}
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function sendSmtpMailOnce(cfg: SmtpConfig, mail: SendMailOptions): Promise<SentMessageInfo> {
+  const transporter = createTransporter(cfg);
+  try {
+    return await transporter.sendMail({ from: cfg.from, ...mail });
+  } finally {
+    transporter.close();
+  }
+}
+
+let sendQueue: Promise<unknown> = Promise.resolve();
+
+export async function sendSmtpMail(mail: SendMailOptions): Promise<SentMessageInfo | null> {
+  const cfg = readSmtpConfig();
+  if (!cfg) return null;
+
+  const run = sendQueue.then(
+    () => sendSmtpMailWithRetry(cfg, mail),
+    () => sendSmtpMailWithRetry(cfg, mail),
+  );
+  sendQueue = run.then(
+    () => undefined,
+    () => undefined,
+  );
+  return run;
+}
+
+async function sendSmtpMailWithRetry(cfg: SmtpConfig, mail: SendMailOptions): Promise<SentMessageInfo> {
+  try {
+    return await sendSmtpMailOnce(cfg, mail);
+  } catch (err) {
+    const detail = err instanceof Error ? err.message : String(err);
+    if (!TRANSIENT_SMTP.test(detail)) throw err;
+    await sleep(500);
+    return await sendSmtpMailOnce(cfg, mail);
+  }
+}
+
+export function getSmtpTransporter(): { sendMail: (mail: SendMailOptions) => Promise<SentMessageInfo> } | null {
+  if (!readSmtpConfig()) return null;
+  return {
+    sendMail: async (mail) => {
+      const info = await sendSmtpMail(mail);
+      if (!info) throw new Error("SMTP not configured");
+      return info;
+    },
+  };
 }
