@@ -1,7 +1,6 @@
 import "server-only";
 import { randomUUID } from "crypto";
-import { getSql, type Sql } from "./neon-client";
-import { deleteNeonAuthIdentity } from "./neon-auth-sync";
+import type { Sql } from "./neon-client";
 import type {
   AccountStatus,
   Court,
@@ -145,33 +144,17 @@ function queueAfterResponse(task: () => Promise<void>) {
   }
 }
 
-async function deleteUserCascade(_sql: Sql, id: string) {
-  const owner = getSql();
-  const identityRows = (await owner`
-    SELECT neon_auth_user_id, email FROM users WHERE id = ${id}
-  `) as { neon_auth_user_id: string | null; email: string | null }[];
-  const identity = {
-    neonAuthUserId: identityRows[0]?.neon_auth_user_id?.trim() || null,
-    email: identityRows[0]?.email?.trim() || null,
-  };
-
-  // Owner connection: RLS on padellab_app can hide a successful DELETE (0 rows)
-  // while the app still sends the deletion email.
-  await owner`DELETE FROM event_signups WHERE event_id IN (SELECT id FROM events WHERE created_by = ${id})`;
-  await owner`DELETE FROM events WHERE created_by = ${id}`;
-  await owner`DELETE FROM event_signups WHERE user_id = ${id}`;
-  await owner`DELETE FROM evaluations WHERE student_id = ${id} OR coach_id = ${id}`;
-  await owner`DELETE FROM lessons WHERE student_id = ${id} OR coach_id = ${id}`;
-  await owner`DELETE FROM coach_agenda_entries WHERE coach_id = ${id}`;
-  await owner`DELETE FROM coach_blocked_dates WHERE coach_id = ${id}`;
-  await owner`DELETE FROM coach_weekly_availability WHERE coach_id = ${id}`;
-  await owner`SELECT public.two_factor_delete(${id})`;
-  await owner`DELETE FROM users WHERE id = ${id}`;
-  const leftover = (await owner`SELECT id FROM users WHERE id = ${id}`) as { id: string }[];
-  if (leftover.length) {
-    throw new Error("USER_DELETE_FAILED");
-  }
-  return identity;
+async function deleteUserCascade(sql: Sql, id: string) {
+  await sql`DELETE FROM event_signups WHERE event_id IN (SELECT id FROM events WHERE created_by = ${id})`;
+  await sql`DELETE FROM events WHERE created_by = ${id}`;
+  await sql`DELETE FROM event_signups WHERE user_id = ${id}`;
+  await sql`DELETE FROM evaluations WHERE student_id = ${id} OR coach_id = ${id}`;
+  await sql`DELETE FROM lessons WHERE student_id = ${id} OR coach_id = ${id}`;
+  await sql`DELETE FROM coach_agenda_entries WHERE coach_id = ${id}`;
+  await sql`DELETE FROM coach_blocked_dates WHERE coach_id = ${id}`;
+  await sql`DELETE FROM coach_weekly_availability WHERE coach_id = ${id}`;
+  await sql`SELECT public.two_factor_delete(${id})`;
+  await sql`DELETE FROM users WHERE id = ${id}`;
 }
 
 async function queueStudentEvaluationAlert(
@@ -552,16 +535,7 @@ export async function handlePadellabMutation(
         return { ok: false, message: "LAST_ADMIN" };
       }
     }
-    let identity: { neonAuthUserId: string | null; email: string | null };
-    try {
-      identity = await deleteUserCascade(sql, id);
-    } catch (err) {
-      if (err instanceof Error && err.message === "USER_DELETE_FAILED") {
-        return { ok: false, message: "Não foi possível eliminar a conta." };
-      }
-      throw err;
-    }
-    await deleteNeonAuthIdentity(identity);
+    await deleteUserCascade(sql, id);
     queueAfterResponse(() =>
       sendAccountDeletedEmail({
         to: row.email,
@@ -600,16 +574,7 @@ export async function handlePadellabMutation(
         return { ok: false, message: "LAST_ADMIN" };
       }
     }
-    let identity: { neonAuthUserId: string | null; email: string | null };
-    try {
-      identity = await deleteUserCascade(sql, id);
-    } catch (err) {
-      if (err instanceof Error && err.message === "USER_DELETE_FAILED") {
-        return { ok: false, message: "Não foi possível eliminar a conta." };
-      }
-      throw err;
-    }
-    await deleteNeonAuthIdentity(identity);
+    await deleteUserCascade(sql, id);
     queueAfterResponse(() =>
       sendAccountDeletedEmail({
         to: row.email,
