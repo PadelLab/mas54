@@ -14,6 +14,11 @@ import {
 import { homePathForUserRole } from "@/lib/role-utils";
 import type { UserRole } from "@/lib/types";
 import { isValidAppEmail, translateEmailApiMessage } from "@/lib/email-format";
+import {
+  passwordPolicyApiMessage,
+  translatePasswordPolicyApiMessage,
+  validateAppPassword,
+} from "@/lib/password-policy";
 import { safeNextPath } from "@/lib/safe-next-path";
 import { Button } from "@/components/ui/button";
 import { AUTH_CONTROL_CLASS, AUTH_FIELD_LABEL_CLASS, Input, Label } from "@/components/ui/input";
@@ -30,7 +35,7 @@ export default function LoginPage() {
 }
 
 function LoginForm() {
-  const { login, verifyTwoFactor, user, hydrated } = useAuth();
+  const { login, completeTempPassword, verifyTwoFactor, user, hydrated } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = safeNextPath(searchParams.get("next"));
@@ -38,9 +43,13 @@ function LoginForm() {
   const tProfile = useTranslations("Profile");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [needsTwoFactor, setNeedsTwoFactor] = useState(false);
+  const [needsTempPassword, setNeedsTempPassword] = useState(false);
   const [twoFactorCode, setTwoFactorCode] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -80,6 +89,41 @@ function LoginForm() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    if (needsTempPassword) {
+      const policy = validateAppPassword(newPassword);
+      if (!policy.ok) {
+        setError(
+          translatePasswordPolicyApiMessage(passwordPolicyApiMessage(policy.code), tProfile) ??
+            tProfile("passwordError"),
+        );
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        setError(t("resetPasswordMismatch"));
+        return;
+      }
+      setBusy(true);
+      const changed = await completeTempPassword(password, newPassword);
+      setBusy(false);
+      if (!changed.ok) {
+        const policyErr = translatePasswordPolicyApiMessage(changed.message, tProfile);
+        setError(
+          changed.message === "EXPIRED"
+            ? t("twoFactorExpired")
+            : changed.message === "SAME_AS_TEMP"
+              ? tProfile("passwordError")
+              : (policyErr ?? changed.message ?? t("errorGeneric")),
+        );
+        return;
+      }
+      if (changed.needsTwoFactor) {
+        setNeedsTempPassword(false);
+        setNeedsTwoFactor(true);
+        return;
+      }
+      finishSignedIn(changed.role);
+      return;
+    }
     if (needsTwoFactor) {
       setBusy(true);
       const verified = await verifyTwoFactor(twoFactorCode);
@@ -112,8 +156,15 @@ function LoginForm() {
       setError(
         res.message === "__SESSION_NOT_LOADED__"
           ? t("sessionNotLoaded")
-          : (emailErr ?? res.message ?? t("errorGeneric")),
+          : res.message === "INVALID_CREDENTIALS" ||
+              /invalid email or password/i.test(res.message ?? "")
+            ? t("errorGeneric")
+            : (emailErr ?? res.message ?? t("errorGeneric")),
       );
+      return;
+    }
+    if (res.mustChangePassword) {
+      setNeedsTempPassword(true);
       return;
     }
     if (res.needsTwoFactor) {
@@ -135,10 +186,12 @@ function LoginForm() {
         </div>
 
         <CardTitle className="mb-1 text-center text-court dark:text-white">
-          {needsTwoFactor ? t("twoFactorTitle") : t("title")}
+          {needsTempPassword ? t("resetPasswordLabel") : needsTwoFactor ? t("twoFactorTitle") : t("title")}
         </CardTitle>
         {needsTwoFactor ? (
           <p className="mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{t("twoFactorIntro")}</p>
+        ) : needsTempPassword ? (
+          <p className="mt-2 text-center text-sm text-zinc-500 dark:text-zinc-400">{tProfile("passwordRequirementsHint")}</p>
         ) : null}
 
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
@@ -161,6 +214,45 @@ function LoginForm() {
                 className={cn(AUTH_CONTROL_CLASS, "mt-0")}
               />
             </div>
+          ) : needsTempPassword ? (
+            <>
+              <div>
+                <Label htmlFor="new-password" className={AUTH_FIELD_LABEL_CLASS}>
+                  {t("resetPasswordLabel")}
+                </Label>
+                <div className="relative min-w-0">
+                  <Input
+                    id="new-password"
+                    type={showNewPassword ? "text" : "password"}
+                    autoComplete="new-password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    required
+                    className={cn(AUTH_CONTROL_CLASS, "mt-0 pr-12")}
+                  />
+                  <PasswordToggle
+                    visible={showNewPassword}
+                    onToggle={() => setShowNewPassword((v) => !v)}
+                    hideLabel={t("hidePassword")}
+                    showLabel={t("showPassword")}
+                  />
+                </div>
+              </div>
+              <div>
+                <Label htmlFor="confirm-password" className={AUTH_FIELD_LABEL_CLASS}>
+                  {t("resetPasswordConfirm")}
+                </Label>
+                <Input
+                  id="confirm-password"
+                  type={showNewPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  className={cn(AUTH_CONTROL_CLASS, "mt-0")}
+                />
+              </div>
+            </>
           ) : (
           <>
           <div>
@@ -223,7 +315,7 @@ function LoginForm() {
             disabled={busy}
             className="h-11 min-h-[44px] w-full touch-manipulation rounded-xl border border-orange-500/35 bg-gradient-to-br from-accent to-orange-600 text-base font-semibold text-white shadow-lg shadow-accent/25 transition hover:brightness-105 disabled:pointer-events-none disabled:opacity-45 dark:border-orange-500/40 dark:shadow-accent/25"
           >
-            {needsTwoFactor ? t("twoFactorSubmit") : t("submit")}
+            {needsTwoFactor ? t("twoFactorSubmit") : needsTempPassword ? tProfile("updatePassword") : t("submit")}
           </Button>
           {needsTwoFactor ? (
             <button
@@ -238,7 +330,7 @@ function LoginForm() {
             >
               {t("twoFactorBack")}
             </button>
-          ) : (
+          ) : needsTempPassword ? null : (
           <p className="text-center text-sm">
             <Link
               href="/login/recover"
@@ -250,7 +342,7 @@ function LoginForm() {
           )}
         </form>
 
-        {needsTwoFactor ? null : (
+        {needsTwoFactor || needsTempPassword ? null : (
         <p className="mt-6 border-t border-zinc-200 pt-6 text-center text-sm text-zinc-600 dark:border-zinc-800/90 dark:text-zinc-500">
           <Link
             href="/register/student"

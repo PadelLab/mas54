@@ -3,7 +3,7 @@ import { passwordPolicyApiMessage, validateAppPassword } from "@/lib/password-po
 import { getSql, withAppSql } from "@/server/padellab/neon-client";
 import { bootstrapDatabase } from "@/server/padellab/seed-data";
 import { authenticateWithNeonAuth, changeNeonAuthPassword } from "@/server/padellab/neon-auth-sync";
-import { hashPassword } from "@/server/padellab/password";
+import { hashPassword, verifyPassword } from "@/server/padellab/password";
 import {
   SESSION_COOKIE_NAME,
   clearSessionCookieOptions,
@@ -75,21 +75,30 @@ export async function POST(req: NextRequest) {
       return res;
     }
 
+    const hashRows = (await sql`
+      SELECT password_hash FROM users WHERE id = ${u.id} LIMIT 1
+    `) as { password_hash: string }[];
+    const clubHashOk = hashRows[0]?.password_hash
+      ? await verifyPassword(currentPassword, hashRows[0].password_hash)
+      : false;
+
     const neonAuth = await authenticateWithNeonAuth({
       email: u.email,
       password: currentPassword,
       allowUnverified: true,
     });
-    if (!neonAuth.ok) {
+    if (!neonAuth.ok && !clubHashOk) {
       return NextResponse.json({ ok: false, message: neonAuth.message });
     }
 
-    const neonChange = await changeNeonAuthPassword({
-      currentPassword,
-      newPassword,
-    });
-    if (!neonChange.ok) {
-      return NextResponse.json({ ok: false, message: neonChange.message });
+    if (neonAuth.ok) {
+      const neonChange = await changeNeonAuthPassword({
+        currentPassword,
+        newPassword,
+      });
+      if (!neonChange.ok && !clubHashOk) {
+        return NextResponse.json({ ok: false, message: neonChange.message });
+      }
     }
 
     const password_hash = await hashPassword(newPassword);

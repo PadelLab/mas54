@@ -68,7 +68,7 @@ ${signInUrl}`;
         </tr>
         <tr>
           <td style="padding:14px 16px;font-size:14px;color:#6b7280;">${escapeMailHtml(passwordLabel)}</td>
-          <td style="padding:14px 16px;font-size:14px;font-weight:700;color:#111827;text-align:right;">${escapeMailHtml(input.tempPassword)}</td>
+          <td style="padding:14px 16px;font-size:14px;font-weight:700;color:#111827;text-align:right;font-family:Consolas,'Courier New',monospace;white-space:nowrap;">${escapeMailHtml(input.tempPassword)}</td>
         </tr>
       </table>
       <div style="font-size:14px;line-height:1.6;color:#6b7280;text-align:left;padding-bottom:22px;">${escapeMailHtml(mustChange)}</div>

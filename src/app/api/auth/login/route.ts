@@ -7,10 +7,19 @@ import {
   formatSessionCookieValue,
   sessionCookieOptions,
 } from "@/server/padellab/session-cookie";
-import { EMAIL_NOT_VERIFIED, authenticateWithNeonAuth } from "@/server/padellab/neon-auth-sync";
+import {
+  EMAIL_NOT_VERIFIED,
+  INVALID_CREDENTIALS,
+  authenticateWithNeonAuth,
+} from "@/server/padellab/neon-auth-sync";
 import { clubLoginBlockedMessage } from "@/server/padellab/club-access";
-import { lookupUserByNeonAuthId } from "@/server/padellab/club-user-lookup";
+import {
+  lookupUserByNeonAuthId,
+  lookupUserForLogin,
+  type ClubUserLookup,
+} from "@/server/padellab/club-user-lookup";
 import { isValidAppEmail, EMAIL_API_MESSAGE } from "@/lib/email-format";
+import { hasCoachPrivileges } from "@/lib/role-utils";
 import { publicApiErrorMessage, rejectIfRateLimited, rejectUntrustedOrigin } from "@/server/padellab/request-guard";
 import {
   TWO_FACTOR_PENDING_COOKIE,
@@ -20,8 +29,72 @@ import {
 } from "@/server/padellab/two-factor";
 import {
   TEMP_PASSWORD_PENDING_COOKIE,
+  formatPendingTempPasswordCookie,
   pendingTempPasswordCookieOptions,
 } from "@/server/padellab/temp-password";
+import { verifyPassword } from "@/server/padellab/password";
+
+function passwordCandidates(password: string): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const p of [password, password.replaceAll("+", ""), password.replaceAll("+", " "), password.replaceAll(" ", "+")]) {
+    if (!p || seen.has(p)) continue;
+    seen.add(p);
+    out.push(p);
+  }
+  return out;
+}
+
+function credentialsFail() {
+  return NextResponse.json({ ok: false, message: INVALID_CREDENTIALS });
+}
+
+async function clubPasswordMatches(
+  sql: ReturnType<typeof getSql>,
+  userId: string,
+  password: string,
+): Promise<boolean> {
+  const rows = (await sql`
+    SELECT password_hash FROM users WHERE id = ${userId} LIMIT 1
+  `) as { password_hash: string }[];
+  const hash = rows[0]?.password_hash;
+  if (!hash) return false;
+  return verifyPassword(password, hash);
+}
+
+function finishClubLogin(
+  u: ClubUserLookup,
+  extra: { needsTwoFactor?: boolean; mustChangePassword?: boolean; pendingTwoFactorToken?: string },
+) {
+  if (extra.mustChangePassword) {
+    const pending = formatPendingTempPasswordCookie(u.id, u.session_version);
+    const res = NextResponse.json({ ok: true, mustChangePassword: true });
+    res.headers.set("Cache-Control", "private, no-store, max-age=0, must-revalidate");
+    res.cookies.set(SESSION_COOKIE_NAME, "", clearSessionCookieOptions());
+    res.cookies.set(TEMP_PASSWORD_PENDING_COOKIE, pending, pendingTempPasswordCookieOptions());
+    res.cookies.set(TWO_FACTOR_PENDING_COOKIE, "", { ...pendingTwoFactorCookieOptions(), maxAge: 0 });
+    return res;
+  }
+  if (extra.needsTwoFactor && extra.pendingTwoFactorToken) {
+    const res = NextResponse.json({
+      ok: true,
+      needsTwoFactor: true,
+      pendingTwoFactorToken: extra.pendingTwoFactorToken,
+    });
+    res.headers.set("Cache-Control", "private, no-store, max-age=0, must-revalidate");
+    res.cookies.set(SESSION_COOKIE_NAME, "", clearSessionCookieOptions());
+    res.cookies.set(TEMP_PASSWORD_PENDING_COOKIE, "", { ...pendingTempPasswordCookieOptions(), maxAge: 0 });
+    res.cookies.set(TWO_FACTOR_PENDING_COOKIE, extra.pendingTwoFactorToken, pendingTwoFactorCookieOptions());
+    return res;
+  }
+  const sessionToken = formatSessionCookieValue(u.id, u.session_version);
+  const res = NextResponse.json({ ok: true, role: u.role, sessionToken });
+  res.headers.set("Cache-Control", "private, no-store, max-age=0, must-revalidate");
+  res.cookies.set(SESSION_COOKIE_NAME, sessionToken, sessionCookieOptions());
+  res.cookies.set(TEMP_PASSWORD_PENDING_COOKIE, "", { ...pendingTempPasswordCookieOptions(), maxAge: 0 });
+  res.cookies.set(TWO_FACTOR_PENDING_COOKIE, "", { ...pendingTwoFactorCookieOptions(), maxAge: 0 });
+  return res;
+}
 
 export async function POST(req: NextRequest) {
   const originBlock = rejectUntrustedOrigin(req);
@@ -41,17 +114,38 @@ export async function POST(req: NextRequest) {
 
     const sql = getSql();
     await bootstrapDatabase(sql);
-    const neon = await authenticateWithNeonAuth({ email, password });
-    if (!neon.ok) {
+    const club = await lookupUserForLogin(sql, email);
+    const staff = Boolean(club && hasCoachPrivileges(club.role));
+    const candidates = staff ? passwordCandidates(password) : [password];
+
+    let neon: Awaited<ReturnType<typeof authenticateWithNeonAuth>> | null = null;
+    for (const candidate of candidates) {
+      neon = await authenticateWithNeonAuth({
+        email,
+        password: candidate,
+        allowUnverified: staff,
+      });
+      if (neon.ok) break;
       if (neon.message === EMAIL_NOT_VERIFIED) {
         return NextResponse.json({ ok: false, message: EMAIL_NOT_VERIFIED });
       }
-      return NextResponse.json({ ok: false, message: neon.message });
     }
+    if (!neon) return credentialsFail();
 
-    const u = await lookupUserByNeonAuthId(sql, neon.userId);
+    let u: ClubUserLookup | null = null;
+    if (neon.ok) {
+      u = await lookupUserByNeonAuthId(sql, neon.userId);
+      if (!u && club) u = club;
+    } else if (club && staff) {
+      for (const candidate of candidates) {
+        if (await clubPasswordMatches(sql, club.id, candidate)) {
+          u = club;
+          break;
+        }
+      }
+    }
     if (!u) {
-      return NextResponse.json({ ok: false, message: "E-mail ou senha incorretos." });
+      return credentialsFail();
     }
 
     const blocked = clubLoginBlockedMessage(u);
@@ -59,24 +153,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, message: blocked });
     }
 
+    if (u.must_change_password) {
+      return finishClubLogin(u, { mustChangePassword: true });
+    }
+
     const needsTwoFactor = await twoFactorIsEnabled(sql, u.id);
     if (needsTwoFactor) {
       const pendingTwoFactorToken = formatPendingTwoFactorCookie(u.id, u.session_version);
-      const res = NextResponse.json({ ok: true, needsTwoFactor: true, pendingTwoFactorToken });
-      res.headers.set("Cache-Control", "private, no-store, max-age=0, must-revalidate");
-      res.cookies.set(SESSION_COOKIE_NAME, "", clearSessionCookieOptions());
-      res.cookies.set(TEMP_PASSWORD_PENDING_COOKIE, "", { ...pendingTempPasswordCookieOptions(), maxAge: 0 });
-      res.cookies.set(TWO_FACTOR_PENDING_COOKIE, pendingTwoFactorToken, pendingTwoFactorCookieOptions());
-      return res;
+      return finishClubLogin(u, { needsTwoFactor: true, pendingTwoFactorToken });
     }
 
-    const sessionToken = formatSessionCookieValue(u.id, u.session_version);
-    const res = NextResponse.json({ ok: true, role: u.role, sessionToken });
-    res.headers.set("Cache-Control", "private, no-store, max-age=0, must-revalidate");
-    res.cookies.set(SESSION_COOKIE_NAME, sessionToken, sessionCookieOptions());
-    res.cookies.set(TEMP_PASSWORD_PENDING_COOKIE, "", { ...pendingTempPasswordCookieOptions(), maxAge: 0 });
-    res.cookies.set(TWO_FACTOR_PENDING_COOKIE, "", { ...pendingTwoFactorCookieOptions(), maxAge: 0 });
-    return res;
+    return finishClubLogin(u, {});
   } catch (e) {
     const message = publicApiErrorMessage(e, "Serviço temporariamente indisponível.");
     return NextResponse.json({ ok: false, message }, { status: 503 });

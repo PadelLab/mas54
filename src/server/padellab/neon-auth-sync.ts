@@ -38,6 +38,7 @@ async function neonAuthUserIdAfterAuth(
 }
 
 export const EMAIL_NOT_VERIFIED = "EMAIL_NOT_VERIFIED";
+export const INVALID_CREDENTIALS = "INVALID_CREDENTIALS";
 
 function neonAuthEnabled() {
   return Boolean(process.env.NEON_AUTH_BASE_URL?.trim() && process.env.NEON_AUTH_COOKIE_SECRET?.trim());
@@ -51,6 +52,11 @@ function errMessage(result: NeonResult | undefined, fallback: string) {
 function isDuplicateAccount(message: string) {
   const m = message.toLowerCase();
   return m.includes("already") || m.includes("exists") || m.includes("já") || m.includes("duplicate");
+}
+
+function isInvalidEmailOrPassword(message: string) {
+  const m = message.toLowerCase();
+  return m.includes("invalid email or password") || m.includes("invalid_email_or_password");
 }
 
 function isEmailNotVerified(message: string) {
@@ -131,7 +137,10 @@ export async function authenticateWithNeonAuth(input: {
       if (unverified) {
         return { ok: false, message: EMAIL_NOT_VERIFIED };
       }
-      return { ok: false, message: errMessage(signedIn, "E-mail ou senha incorretos.") };
+      if (isInvalidEmailOrPassword(signedIn.error.message ?? "")) {
+        return { ok: false, message: INVALID_CREDENTIALS };
+      }
+      return { ok: false, message: errMessage(signedIn, INVALID_CREDENTIALS) };
     }
     const userId = await neonAuthUserIdAfterAuth(auth, signedIn);
     if (!userId) {

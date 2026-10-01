@@ -701,7 +701,12 @@ export async function handlePadellabMutation(
     const password = isTempAlphanumericPassword(proposed) ? proposed : generateTempPassword(8);
     const dup = await userEmailTaken(sql, email);
     if (dup) return emailTakenMessage();
-    const neon = await createNeonAuthUser({ email, password, name });
+    const neon = await createNeonAuthUser({
+      email,
+      password,
+      name,
+      skipVerificationEmail: true,
+    });
     if (!neon.ok) return { ok: false, message: neon.message };
     const id = `u-${randomUUID()}`;
     const createdAt = new Date().toISOString();
@@ -722,7 +727,7 @@ export async function handlePadellabMutation(
         ${0},
         ${accountLocale},
         ${neon.userId},
-        ${false}
+        ${true}
       )
     `;
     } catch (e) {

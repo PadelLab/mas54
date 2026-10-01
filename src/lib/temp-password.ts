@@ -2,7 +2,8 @@ export const TEMP_PASSWORD_LENGTH = 8;
 
 const LETTERS = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 const DIGITS = "23456789";
-const SPECIALS = "!@#$%*?+-";
+/** Omit `+`: many mail clients copy it as a space, so the emailed password never matches. */
+const SPECIALS = "!@#$%*?-";
 const ALL = LETTERS + DIGITS + SPECIALS;
 const ALLOWED = /^[A-Za-z0-9!@#$%*?+\-]+$/;
 const HAS_SPECIAL = /[!@#$%*?+\-]/;
