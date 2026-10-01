@@ -49,6 +49,7 @@ function LoginForm() {
   const [otpInfo, setOtpInfo] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [needsTwoFactor, setNeedsTwoFactor] = useState(false);
   const [needsTempEmailCode, setNeedsTempEmailCode] = useState(false);
@@ -325,15 +326,23 @@ function LoginForm() {
                 <Label htmlFor="confirm-password" className={AUTH_FIELD_LABEL_CLASS}>
                   {t("mustChangeConfirm")}
                 </Label>
-                <Input
-                  id="confirm-password"
-                  type={showNewPassword ? "text" : "password"}
-                  autoComplete="new-password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  className={cn(AUTH_CONTROL_CLASS, "mt-0")}
-                />
+                <div className="relative min-w-0">
+                  <Input
+                    id="confirm-password"
+                    type={showConfirmPassword ? "text" : "password"}
+                    autoComplete="new-password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    className={cn(AUTH_CONTROL_CLASS, "mt-0 pr-12")}
+                  />
+                  <PasswordToggle
+                    visible={showConfirmPassword}
+                    onToggle={() => setShowConfirmPassword((v) => !v)}
+                    hideLabel={t("hidePassword")}
+                    showLabel={t("showPassword")}
+                  />
+                </div>
               </div>
             </>
           ) : (

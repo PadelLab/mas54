@@ -11,7 +11,7 @@ import { translatePasswordPolicyApiMessage } from "@/lib/password-policy";
 import { generateTempAlphanumericPassword, isTempAlphanumericPassword } from "@/lib/temp-password";
 import { useTranslations } from "next-intl";
 import { isValidAppEmail, translateEmailApiMessage } from "@/lib/email-format";
-import { Check, Copy, RefreshCw } from "lucide-react";
+import { Check, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { NewUserSource } from "./new-user-source";
@@ -78,7 +78,6 @@ export function CreateNewUserForm({
   const [createdMsg, setCreatedMsg] = useState<string | null>(null);
   const [formErr, setFormErr] = useState<string | null>(null);
   const [tempPassword, setTempPassword] = useState("");
-  const [copied, setCopied] = useState(false);
   const [showTempPassword, setShowTempPassword] = useState(false);
   const [emailAutofillGuard, setEmailAutofillGuard] = useState(true);
   const [busy, setBusy] = useState(false);
@@ -95,7 +94,6 @@ export function CreateNewUserForm({
 
   const regenerate = useCallback(async () => {
     setGenerating(true);
-    setCopied(false);
     try {
       setTempPassword(await fetchTempPasswordFromApi());
     } finally {
@@ -130,7 +128,6 @@ export function CreateNewUserForm({
         onSubmit={async (e) => {
           e.preventDefault();
           setFormErr(null);
-          setCopied(false);
           if (!name || !email || !tempPassword) return;
           if (!isValidAppEmail(email)) {
             setFormErr(tProfile("emailInvalid"));
@@ -224,23 +221,6 @@ export function CreateNewUserForm({
               title={t("regeneratePassword")}
             >
               <RefreshCw className={`h-4 w-4 ${generating ? "animate-spin" : ""}`} />
-            </button>
-            <button
-              type="button"
-              onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(tempPassword);
-                  setCopied(true);
-                  setTimeout(() => setCopied(false), 2000);
-                } catch {
-                  setCopied(false);
-                }
-              }}
-              className={iconBtnClass}
-              aria-label={copied ? t("copiedPassword") : t("copyPassword")}
-              title={copied ? t("copiedPassword") : t("copyPassword")}
-            >
-              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
             </button>
           </div>
         </div>
