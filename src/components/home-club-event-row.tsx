@@ -2,13 +2,12 @@
 
 import { formatHm24 } from "@/lib/schedule-date";
 import type { EventItem } from "@/lib/types";
-import { formatDate, isSubstantialVenueText } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import { CalendarDays, MapPin, Trophy } from "lucide-react";
+import { CLUB_VENUE_LABEL } from "@/lib/club-venue";
 
-export function homeEventVenue(event: EventItem): string {
-  if (event.venue?.trim()) return event.venue.trim();
-  if (isSubstantialVenueText(event.address)) return event.address.trim();
-  return "";
+export function homeEventVenue(_event: EventItem): string {
+  return CLUB_VENUE_LABEL;
 }
 
 export function HomeClubEventRow({

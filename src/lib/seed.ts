@@ -75,7 +75,7 @@ export const seedUsers: User[] = [
 export const seedCourts: Court[] = [
   {
     id: "c1",
-    name: "Central Court",
+    name: "+54",
     courtType: "Outdoor",
     courtNumber: "1",
     address: "Club Street 42 — Main hall",
@@ -84,7 +84,7 @@ export const seedCourts: Court[] = [
   },
   {
     id: "c2",
-    name: "Indoor Court A",
+    name: "+54",
     courtType: "Indoor",
     courtNumber: "2",
     address: "Club Street 42 — Covered hall, door B",
@@ -93,7 +93,7 @@ export const seedCourts: Court[] = [
   },
   {
     id: "c3",
-    name: "Indoor Court B",
+    name: "+54",
     courtType: "Indoor",
     courtNumber: "3",
     address: "Club Street 42 — Covered hall, door C",

@@ -13,6 +13,7 @@ import {
 } from "@/lib/events-shared";
 import { lessonActivityCategoryAndFocusLine } from "@/lib/lesson-activity-display";
 import { appLocaleToIntlLocale, eventScheduleStartUtcMs, formatHm24, todayYmdInAppTz } from "@/lib/schedule-date";
+import { CLUB_VENUE_LABEL } from "@/lib/club-venue";
 import { cn, formatDate, pageTitleClass } from "@/lib/utils";
 import { ArrowDownRight, ArrowUpRight, CalendarDays, MapPin, Trophy, type LucideIcon } from "lucide-react";
 import { useMemo } from "react";
@@ -51,7 +52,7 @@ function HomeListCardHeader({
 }
 
 export default function StudentDashboardPage() {
-  const { user, events, lessons, courts, evaluations, lessonActivityCatalog } = useAuth();
+  const { user, events, lessons, evaluations, lessonActivityCatalog } = useAuth();
   const t = useTranslations("StudentDashboard");
   const tOverall = useTranslations("StudentOverall");
   const tClub = useTranslations("ClubEvents");
@@ -179,7 +180,6 @@ export default function StudentDashboardPage() {
                   (key) => tTypes(key),
                   tDr("drShort"),
                 );
-                const court = courts.find((c) => c.id === l.courtId);
                 const title = focusLine && focusLine !== "—" ? focusLine : category || "—";
                 return (
                   <li
@@ -194,12 +194,10 @@ export default function StudentDashboardPage() {
                       <p className="mt-0.5 text-sm text-zinc-500 dark:text-zinc-400">
                         {formatDate(l.date, intlLocale)} - {formatHm24(l.time)}
                       </p>
-                      {court?.name ? (
-                        <p className="mt-0.5 flex items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400">
-                          <MapPin className="h-3.5 w-3.5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden />
-                          <span className="truncate">{court.name}</span>
-                        </p>
-                      ) : null}
+                      <p className="mt-0.5 flex items-center gap-1 text-sm text-zinc-500 dark:text-zinc-400">
+                        <MapPin className="h-3.5 w-3.5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden />
+                        <span className="truncate">{CLUB_VENUE_LABEL}</span>
+                      </p>
                     </div>
                     <span
                       className={cn(

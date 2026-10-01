@@ -26,6 +26,7 @@ import { isValidPhoneNumber } from "libphonenumber-js/min";
 import { dateToIsoLocal, validateBirthDateForRegistration } from "@/lib/birth-date";
 import { isIsoCountryCode } from "@/lib/iso-regions";
 import { addMonths } from "@/lib/utils";
+import { CLUB_VENUE_LABEL } from "@/lib/club-venue";
 import { hmToMinutes, isCoachSlotAvailable } from "@/lib/coach-availability";
 import {
   eventScheduleStartUtcMs,
@@ -1188,7 +1189,7 @@ export async function handlePadellabMutation(
       const date = normalizeDbEventDateString(invite.date);
       const time = normalizeDbEventTimeString(invite.time);
       if (date && time) {
-        const courtLabel = [invite.court_name, invite.court_address?.trim()].filter(Boolean).join(" · ");
+        const courtLabel = CLUB_VENUE_LABEL;
         if (invite.student_email && invite.student_reminders) {
           queueAfterResponse(() =>
             sendLessonCalendarInvite({

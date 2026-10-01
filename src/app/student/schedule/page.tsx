@@ -22,6 +22,7 @@ import {
   parseScheduleDate,
 } from "@/lib/schedule-date";
 import type { EventItem } from "@/lib/types";
+import { CLUB_VENUE_LABEL } from "@/lib/club-venue";
 import { EVENT_TYPE_I18N_KEY, isClubEventClosed } from "@/lib/events-shared";
 import { tSafe } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
@@ -76,7 +77,7 @@ export default function StudentSchedulePage() {
         sub: "",
         eventType: e.type,
         address: e.address?.trim() || undefined,
-        venue: e.venue?.trim() || undefined,
+        venue: CLUB_VENUE_LABEL,
         description: e.description?.replace(/\s+/g, " ").trim() || undefined,
       })),
       ...myLessons.map((l) => {
@@ -112,7 +113,7 @@ export default function StudentSchedulePage() {
     if (filter === "lessons") next = next.filter((r) => r.kind === "lesson");
     if (filter === "events") next = next.filter((r) => r.kind === "event");
     next = next.filter((r) => {
-      const courtName = courts.find((c) => c.id === r.courtId)?.name ?? "";
+      const courtName = CLUB_VENUE_LABEL;
       return rowMatchesSearch(
         [
           r.title,
@@ -136,7 +137,7 @@ export default function StudentSchedulePage() {
       );
     });
     return next;
-  }, [rows, filter, query, courts, t, tClub, intlLocale]);
+  }, [rows, filter, query, t, tClub, intlLocale]);
 
   const grouped = useMemo(() => {
     const m = new Map<string, Row[]>();

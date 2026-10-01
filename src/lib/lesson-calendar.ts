@@ -2,7 +2,7 @@ import { LESSON_DURATION_MIN } from "@/lib/coach-availability";
 import { eventScheduleStartUtcMs } from "@/lib/schedule-date";
 
 /** Location shown in Google / Outlook / Apple Calendar. */
-export const CALENDAR_EVENT_LOCATION = "+54 academia";
+export const CALENDAR_EVENT_LOCATION = "+54";
 
 export type LessonCalendarPerson = {
   name: string;

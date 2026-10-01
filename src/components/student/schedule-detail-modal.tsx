@@ -4,6 +4,7 @@ import { LessonActivityLine } from "@/components/lesson-activity-line";
 import { Button } from "@/components/ui/button";
 import { CALENDAR_EVENT_LOCATION, buildLessonIcs, downloadLessonIcs } from "@/lib/lesson-calendar";
 import { appLocaleToIntlLocale, formatDaySectionTitle, formatHm24 } from "@/lib/schedule-date";
+import { CLUB_VENUE_LABEL } from "@/lib/club-venue";
 import { EVENT_TYPE_I18N_KEY } from "@/lib/events-shared";
 import type { Court, EventItem, Lesson, User } from "@/lib/types";
 import { useLocale, useTranslations } from "next-intl";
@@ -76,13 +77,12 @@ function DetailRow({ label, children }: { label: string; children: React.ReactNo
 export function EventDetailFields({ event }: { event: EventItem }) {
   const t = useTranslations("StudentSchedule");
   const tClub = useTranslations("ClubEvents");
-  const venue = event.venue?.trim() ?? "";
   const address = event.address?.trim() ?? "";
   const description = event.description?.trim() ?? "";
   return (
     <div className="space-y-4">
       <DetailRow label={t("detail.eventType")}>{tClub(EVENT_TYPE_I18N_KEY[event.type])}</DetailRow>
-      <DetailRow label={t("detail.eventVenue")}>{venue}</DetailRow>
+      <DetailRow label={t("detail.eventVenue")}>{CLUB_VENUE_LABEL}</DetailRow>
       <DetailRow label={t("detail.address")}>{address}</DetailRow>
       <DetailRow label={t("detail.eventDescription")}>
         <span className="whitespace-pre-wrap font-normal leading-relaxed">{description}</span>

@@ -11,7 +11,8 @@ import { AppDateRangePicker, EMPTY_DATE_FILTER, type ScheduleDateFilter } from "
 import { ListSearchField, ListToolbar, applyEventListSearch } from "@/components/list-search-field";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { isSubstantialVenueText, pageTitleClass, tSafe } from "@/lib/utils";
+import { CLUB_VENUE_LABEL } from "@/lib/club-venue";
+import { pageTitleClass, tSafe } from "@/lib/utils";
 import {
   EVENT_TYPE_I18N_KEY,
   eventPublicKey,
@@ -76,11 +77,7 @@ export function EventsAgendaList({
     return counts;
   }, [eventSignups]);
 
-  const venueLine = (ev: EventItem) => {
-    if (ev.venue?.trim()) return ev.venue.trim();
-    if (isSubstantialVenueText(ev.address)) return ev.address.trim();
-    return "";
-  };
+  const venueLine = (_ev: EventItem) => CLUB_VENUE_LABEL;
 
   return (
     <>

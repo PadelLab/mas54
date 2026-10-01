@@ -14,7 +14,8 @@ import {
   sortEventsByDateTimeDesc,
 } from "@/lib/events-shared";
 import type { EventItem } from "@/lib/types";
-import { isSubstantialVenueText, pageTitleClass, tSafe } from "@/lib/utils";
+import { CLUB_VENUE_LABEL } from "@/lib/club-venue";
+import { pageTitleClass, tSafe } from "@/lib/utils";
 import { appLocaleToIntlLocale } from "@/lib/schedule-date";
 import { ListSearchField, ListToolbar, applyEventListSearch } from "@/components/list-search-field";
 import { Button } from "@/components/ui/button";
@@ -127,11 +128,7 @@ export default function StudentEventsPage() {
                   {items.map((ev) => {
                     const closed = isClubEventClosed(ev, nowMs);
                     const inList = joined(ev.id);
-                    const venue = ev.venue?.trim()
-                      ? ev.venue.trim()
-                      : isSubstantialVenueText(ev.address)
-                        ? ev.address.trim()
-                        : "";
+                    const venue = CLUB_VENUE_LABEL;
                     return (
                       <EventScheduleCard
                         key={ev.id}
