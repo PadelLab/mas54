@@ -4,6 +4,7 @@ import { useAuth } from "@/contexts/auth-context";
 import { Card, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
+import { PasswordToggle } from "@/components/ui/password-toggle";
 import { FORM_SUBMIT_BUTTON_CLASS, LIST_CONTROL_CLASS } from "@/components/list-search-field";
 import type { CoachAccessRole } from "@/lib/types";
 import { translatePasswordPolicyApiMessage } from "@/lib/password-policy";
@@ -68,6 +69,7 @@ export function CreateNewUserForm({
   onCreated?: () => void;
 }) {
   const t = useTranslations("AdminNewUserForm");
+  const tLogin = useTranslations("Login");
   const tProfile = useTranslations("Profile");
   const { createCoachAccess } = useAuth();
   const [name, setName] = useState("");
@@ -77,6 +79,7 @@ export function CreateNewUserForm({
   const [formErr, setFormErr] = useState<string | null>(null);
   const [tempPassword, setTempPassword] = useState("");
   const [copied, setCopied] = useState(false);
+  const [showTempPassword, setShowTempPassword] = useState(false);
   const [emailAutofillGuard, setEmailAutofillGuard] = useState(true);
   const [busy, setBusy] = useState(false);
   const [generating, setGenerating] = useState(true);
@@ -195,16 +198,23 @@ export function CreateNewUserForm({
         <div className="sm:col-span-2">
           <Label htmlFor="padellab-staff-create-temp-password">{t("tempPasswordShown")}</Label>
           <div className="flex items-center gap-2">
-            <Input
-              id="padellab-staff-create-temp-password"
-              name="padellab-staff-create-temp-password"
-              type="text"
-              inputMode="text"
-              autoComplete="off"
-              readOnly
-              value={tempPassword}
-              className="font-mono text-base tracking-wider"
-            />
+            <div className="relative min-w-0 flex-1">
+              <Input
+                id="padellab-staff-create-temp-password"
+                name="padellab-staff-create-temp-password"
+                type={showTempPassword ? "text" : "password"}
+                autoComplete="off"
+                readOnly
+                value={tempPassword}
+                className="pr-12 font-mono text-base tracking-wider"
+              />
+              <PasswordToggle
+                visible={showTempPassword}
+                onToggle={() => setShowTempPassword((v) => !v)}
+                hideLabel={tLogin("hidePassword")}
+                showLabel={tLogin("showPassword")}
+              />
+            </div>
             <button
               type="button"
               onClick={() => void regenerate()}

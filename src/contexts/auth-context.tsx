@@ -129,6 +129,7 @@ type AuthContextValue = {
     role?: UserRole;
     needsTwoFactor?: boolean;
     mustChangePassword?: boolean;
+    needsEmailOtp?: boolean;
   }>;
   completeTempPassword: (
     currentPassword: string,
@@ -434,6 +435,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       role?: UserRole;
       needsTwoFactor?: boolean;
       mustChangePassword?: boolean;
+      needsEmailOtp?: boolean;
     }>(
       "/api/auth/login",
       { email, password }
@@ -442,7 +444,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return { ok: false as const, message: data.message ?? "Erro ao entrar." };
     }
     if (data.mustChangePassword) {
-      return { ok: true as const, mustChangePassword: true };
+      return { ok: true as const, mustChangePassword: true, needsEmailOtp: data.needsEmailOtp !== false };
     }
     if (data.needsTwoFactor) {
       return { ok: true as const, needsTwoFactor: true };

@@ -19,6 +19,7 @@ import {
   twoFactorIsEnabled,
 } from "@/server/padellab/two-factor";
 import {
+  TEMP_EMAIL_OK_COOKIE,
   TEMP_PASSWORD_PENDING_COOKIE,
   clearPendingTempPasswordCookie,
   parsePendingTempPasswordCookie,
@@ -38,6 +39,14 @@ export async function POST(req: NextRequest) {
     const pending = parsePendingTempPasswordCookie(req.cookies.get(TEMP_PASSWORD_PENDING_COOKIE)?.value);
     if (!pending) {
       return NextResponse.json({ ok: false, message: "EXPIRED" });
+    }
+    const mailOk = parsePendingTempPasswordCookie(req.cookies.get(TEMP_EMAIL_OK_COOKIE)?.value);
+    if (
+      !mailOk ||
+      mailOk.userId !== pending.userId ||
+      mailOk.sessionVersion !== pending.sessionVersion
+    ) {
+      return NextResponse.json({ ok: false, message: "NEED_EMAIL_CODE" });
     }
 
     const body = (await req.json()) as { currentPassword?: string; newPassword?: string };

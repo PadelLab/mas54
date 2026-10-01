@@ -57,6 +57,10 @@ function VerifyEmailForm() {
         );
         return;
       }
+      if (res.mustChangePassword) {
+        router.replace(`/login?email=${encodeURIComponent(email)}`);
+        return;
+      }
       const r = res.role;
       if (
         (r === "student" || r === "coach" || r === "coach_admin") &&

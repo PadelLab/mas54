@@ -5,11 +5,18 @@ import { getSql } from "@/server/padellab/neon-client";
 import { bootstrapDatabase } from "@/server/padellab/seed-data";
 import {
   SESSION_COOKIE_NAME,
+  clearSessionCookieOptions,
   formatSessionCookieValue,
   sessionCookieOptions,
 } from "@/server/padellab/session-cookie";
 import { verifyNeonAuthEmailOtp } from "@/server/padellab/neon-auth-sync";
 import { publicApiErrorMessage, rejectIfRateLimited, rejectUntrustedOrigin } from "@/server/padellab/request-guard";
+import {
+  TEMP_EMAIL_OK_COOKIE,
+  TEMP_PASSWORD_PENDING_COOKIE,
+  formatPendingTempPasswordCookie,
+  pendingTempPasswordCookieOptions,
+} from "@/server/padellab/temp-password";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -42,6 +49,16 @@ export async function POST(req: NextRequest) {
     const blocked = clubLoginBlockedMessage(u);
     if (blocked) {
       return NextResponse.json({ ok: false, message: blocked });
+    }
+
+    if (u.must_change_password) {
+      const pending = formatPendingTempPasswordCookie(u.id, u.session_version);
+      const res = NextResponse.json({ ok: true, mustChangePassword: true, role: u.role });
+      res.headers.set("Cache-Control", "private, no-store, max-age=0, must-revalidate");
+      res.cookies.set(SESSION_COOKIE_NAME, "", clearSessionCookieOptions());
+      res.cookies.set(TEMP_PASSWORD_PENDING_COOKIE, pending, pendingTempPasswordCookieOptions());
+      res.cookies.set(TEMP_EMAIL_OK_COOKIE, pending, pendingTempPasswordCookieOptions());
+      return res;
     }
 
     const sessionToken = formatSessionCookieValue(u.id, u.session_version);

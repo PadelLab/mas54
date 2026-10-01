@@ -11,6 +11,8 @@ import {
   EMAIL_NOT_VERIFIED,
   INVALID_CREDENTIALS,
   authenticateWithNeonAuth,
+  isEmailAlreadyVerified,
+  resendNeonAuthVerification,
 } from "@/server/padellab/neon-auth-sync";
 import { clubLoginBlockedMessage } from "@/server/padellab/club-access";
 import {
@@ -29,6 +31,7 @@ import {
 } from "@/server/padellab/two-factor";
 import {
   TEMP_PASSWORD_PENDING_COOKIE,
+  TEMP_EMAIL_OK_COOKIE,
   formatPendingTempPasswordCookie,
   pendingTempPasswordCookieOptions,
 } from "@/server/padellab/temp-password";
@@ -64,14 +67,25 @@ async function clubPasswordMatches(
 
 function finishClubLogin(
   u: ClubUserLookup,
-  extra: { needsTwoFactor?: boolean; mustChangePassword?: boolean; pendingTwoFactorToken?: string },
+  extra: {
+    needsTwoFactor?: boolean;
+    mustChangePassword?: boolean;
+    needsEmailOtp?: boolean;
+    pendingTwoFactorToken?: string;
+  },
 ) {
   if (extra.mustChangePassword) {
     const pending = formatPendingTempPasswordCookie(u.id, u.session_version);
-    const res = NextResponse.json({ ok: true, mustChangePassword: true });
+    const needsEmailOtp = extra.needsEmailOtp !== false;
+    const res = NextResponse.json({ ok: true, mustChangePassword: true, needsEmailOtp });
     res.headers.set("Cache-Control", "private, no-store, max-age=0, must-revalidate");
     res.cookies.set(SESSION_COOKIE_NAME, "", clearSessionCookieOptions());
     res.cookies.set(TEMP_PASSWORD_PENDING_COOKIE, pending, pendingTempPasswordCookieOptions());
+    if (needsEmailOtp) {
+      res.cookies.set(TEMP_EMAIL_OK_COOKIE, "", { ...pendingTempPasswordCookieOptions(), maxAge: 0 });
+    } else {
+      res.cookies.set(TEMP_EMAIL_OK_COOKIE, pending, pendingTempPasswordCookieOptions());
+    }
     res.cookies.set(TWO_FACTOR_PENDING_COOKIE, "", { ...pendingTwoFactorCookieOptions(), maxAge: 0 });
     return res;
   }
@@ -84,6 +98,7 @@ function finishClubLogin(
     res.headers.set("Cache-Control", "private, no-store, max-age=0, must-revalidate");
     res.cookies.set(SESSION_COOKIE_NAME, "", clearSessionCookieOptions());
     res.cookies.set(TEMP_PASSWORD_PENDING_COOKIE, "", { ...pendingTempPasswordCookieOptions(), maxAge: 0 });
+    res.cookies.set(TEMP_EMAIL_OK_COOKIE, "", { ...pendingTempPasswordCookieOptions(), maxAge: 0 });
     res.cookies.set(TWO_FACTOR_PENDING_COOKIE, extra.pendingTwoFactorToken, pendingTwoFactorCookieOptions());
     return res;
   }
@@ -92,6 +107,7 @@ function finishClubLogin(
   res.headers.set("Cache-Control", "private, no-store, max-age=0, must-revalidate");
   res.cookies.set(SESSION_COOKIE_NAME, sessionToken, sessionCookieOptions());
   res.cookies.set(TEMP_PASSWORD_PENDING_COOKIE, "", { ...pendingTempPasswordCookieOptions(), maxAge: 0 });
+  res.cookies.set(TEMP_EMAIL_OK_COOKIE, "", { ...pendingTempPasswordCookieOptions(), maxAge: 0 });
   res.cookies.set(TWO_FACTOR_PENDING_COOKIE, "", { ...pendingTwoFactorCookieOptions(), maxAge: 0 });
   return res;
 }
@@ -154,7 +170,12 @@ export async function POST(req: NextRequest) {
     }
 
     if (u.must_change_password) {
-      return finishClubLogin(u, { mustChangePassword: true });
+      let needsEmailOtp = true;
+      const sent = await resendNeonAuthVerification(u.email);
+      if (!sent.ok && isEmailAlreadyVerified(sent.message)) {
+        needsEmailOtp = false;
+      }
+      return finishClubLogin(u, { mustChangePassword: true, needsEmailOtp });
     }
 
     const needsTwoFactor = await twoFactorIsEnabled(sql, u.id);

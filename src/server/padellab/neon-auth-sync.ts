@@ -118,7 +118,7 @@ export async function authenticateWithNeonAuth(input: {
   password: string;
   /** Allow continuing even if Neon still requires email verification. */
   allowUnverified?: boolean;
-}): Promise<{ ok: true; userId: string } | { ok: false; message: string }> {
+}): Promise<{ ok: true; userId: string; emailVerified: boolean } | { ok: false; message: string }> {
   if (!neonAuthEnabled()) {
     return { ok: false, message: "Neon Auth não está configurado." };
   }
@@ -132,7 +132,7 @@ export async function authenticateWithNeonAuth(input: {
       const unverified = isEmailNotVerified(signedIn.error.message ?? "");
       if (unverified && input.allowUnverified) {
         const userId = await neonAuthUserIdAfterAuth(auth, signedIn);
-        if (userId) return { ok: true, userId };
+        if (userId) return { ok: true, userId, emailVerified: false };
       }
       if (unverified) {
         return { ok: false, message: EMAIL_NOT_VERIFIED };
@@ -146,7 +146,7 @@ export async function authenticateWithNeonAuth(input: {
     if (!userId) {
       return { ok: false, message: "Não foi possível autenticar." };
     }
-    return { ok: true, userId };
+    return { ok: true, userId, emailVerified: true };
   } catch (err) {
     if (process.env.NODE_ENV === "development") {
       console.warn("[neon-auth] authenticate failed", err);
@@ -206,7 +206,7 @@ function authCallbackOrigin() {
   return appUrl;
 }
 
-function isEmailAlreadyVerified(message: string) {
+export function isEmailAlreadyVerified(message: string) {
   const m = message.toLowerCase();
   return (
     m.includes("already verified") ||
@@ -286,7 +286,11 @@ export async function resendNeonAuthVerification(email: string): Promise<{ ok: t
       12_000,
     )) as NeonResult;
     if (sent.error) {
-      return { ok: false, message: errMessage(sent, "Não foi possível reenviar o código.") };
+      const message = errMessage(sent, "Não foi possível reenviar o código.");
+      if (isEmailAlreadyVerified(message)) {
+        return { ok: false, message };
+      }
+      return { ok: false, message };
     }
     return { ok: true };
   } catch (err) {
